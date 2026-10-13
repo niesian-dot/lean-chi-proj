@@ -1,0 +1,2957 @@
+# Chi's Conjecture for Split Reductive Groups
+
+## A Complete Proof Argument under He's Assumptions
+
+## Contents
+
+1. [The Statement, Notation, and Standard Inputs](#chapter-1)
+2. [Reduction to Local Regular-Point Transitivity](#chapter-2)
+3. [Centralizer Grades and All Reductive Central Forms](#chapter-3)
+4. [Types A and C](#chapter-4)
+5. [Ordinary and Vector Classes in Types B and D](#chapter-5)
+6. [The Half-Spin Finite Lemma in Even Rank D](#chapter-6)
+7. [The Primitive-Spinor Finite Lemma in Odd Rank D](#chapter-7)
+8. [Uniform Tame Normalization and Integral Descent](#chapter-8)
+9. [Exceptional Types](#chapter-9)
+10. [All Root Types, Actual Newton Levis, and Completion](#chapter-10)
+11. [Inputs, Finite Checks, and References](#chapter-11)
+
+### Abstract
+
+This manuscript assembles the written proof argument for the top-dimensional component formula at all Newton points of a split connected reductive group in the equal- and mixed-characteristic settings of He. It expands the general linear and symplectic lattice arguments, the ordinary and vector orthogonal cases, the spinorial finite lemmas, the exceptional finite lemmas, integral conjugacy and tame descent, and transfer through all reductive central forms. The finite-dimensional structural theorems and He’s geometric reduction are stated as explicit inputs.
+
+**Manuscript status.** This is the English version of the previously assembled research proof manuscript. Its internal checks and finite calculations do not constitute external peer review, a publication claim, or Lean formal verification. Document-format checks do not establish the mathematical validity of the argument.
+
+All references to He’s theorem and proposition numbers use *Irreducible components of affine Lusztig varieties*, arXiv:2502.16441v1 \[He\].
+
+<a id="chapter-1"></a>
+
+## 1. The Statement, Notation, and Standard Inputs
+
+### 1.1. The ground field and the group
+
+Let $k$ be algebraically closed, and take 
+
+$$
+(\mathcal O,L,t)=
+\begin{cases}
+(k[[t]],k((t)),t),&\text{in equal characteristic},\\
+(W(k),W(k)[1/p],p),&\text{in He's mixed-characteristic setting}.
+\end{cases}
+$$
+
+ Normalize the valuation by $v_L(t)=1$. Let $G$ be a split connected reductive group over $L$, and assume 
+
+$$
+\operatorname{char}k=0
+\quad\text{or}\quad
+p=\operatorname{char}k>0,\qquad p\nmid |W(G)|.
+$$
+
+ The Weyl group of every Levi is a subgroup of $W(G)$; hence the same characteristic hypothesis holds in all Newton Levis. The orders of the finite centers, tame extensions, and finite actions used below are invertible in $\mathcal O$.
+
+Fix a split maximal torus $T_0$, a Borel, and a dominant Weyl chamber. Write 
+
+$$
+X_*=X_*(T_0),\qquad Q^\vee=\mathbb Z\Phi^\vee,\qquad
+\pi_1(G)=X_*/Q^\vee .
+$$
+
+ All torsion in $\pi_1(G)$ is retained. Let $K_{\mathrm{sp}}$ be the standard hyperspecial subgroup, let $I\subset K_{\mathrm{sp}}$ be an Iwahori subgroup, let $\widetilde W=X_*\rtimes W_0$, and let $w_0$ be the longest element of $W_0$. Denote the length-zero subgroup by $\Omega$.
+
+### 1.2. Affine Lusztig varieties and the component formula
+
+For a regular semisimple $\gamma\in G(L)$ and a dominant coweight $\mu$, put 
+
+$$
+Y_\mu(\gamma)=
+\{gK_{\mathrm{sp}}\in G(L)/K_{\mathrm{sp}}:
+g^{-1}\gamma g\in K_{\mathrm{sp}}t^\mu K_{\mathrm{sp}}\}.
+$$
+
+ In the affine flag variety put 
+
+$$
+Y_w(\gamma)=\{gI:g^{-1}\gamma g\in I\dot wI\}.
+$$
+
+ In mixed characteristic these expressions have the perfected geometric interpretation used by He. Write $\Sigma^{\mathrm{top}}X$ for the irreducible components of dimension $\dim X$.
+
+Associate $\{\gamma\}$ with the corresponding $\sigma$-conjugacy class $[b]$ as in He, Section 1.2; their Newton and Kottwitz invariants match. Let $\lambda_b$ be the best integral approximation used in He, Section 3.2. Let $\widehat G$ be the complex Langlands dual group, and let $V_\mu$ be its irreducible highest-weight representation of highest weight $\mu$.
+
+**Theorem 1.1 (The claimed main formula).**
+
+Under the assumptions above, for every regular semisimple $\gamma$ and every dominant $\mu$ with $Y_\mu(\gamma)\ne\varnothing$, the assembled argument gives 
+
+$$
+\boxed{
+\#\left(
+Z_G(\gamma)(L)\backslash
+\Sigma^{\mathrm{top}}Y_\mu(\gamma)
+\right)
+=\dim V_\mu(\lambda_b).
+}
+$$
+
+ No integral-Newton condition is imposed. Arbitrary split central tori, central quotients, and central couplings between simple factors are allowed.
+
+### 1.3. The best integral approximation retains Kottwitz data
+
+In the split case one can describe $\lambda_b$ concretely. Choose $\lambda_0\in X_*$ mapping to $\kappa(b)$, and write 
+
+$$
+\nu_b-\lambda_0=\sum_i c_i\alpha_i^\vee,\qquad c_i\in\mathbb Q,
+$$
+
+ in the semisimple directions; the central projection of $\nu_b$ equals the rational image of $\kappa(b)$. Then 
+
+$$
+\lambda_b=\lambda_0+\sum_i\lfloor c_i\rfloor\alpha_i^\vee.
+$$
+
+ Changing $\lambda_0$ changes the $c_i$ by integers, so the expression is independent of that choice. It is the largest integral element in the Kottwitz coset lying below $\nu_b$ in the coroot order. Equivalently, 
+
+$$
+\nu_b-\lambda_b=\sum_i d_i\alpha_i^\vee,\qquad 0\le d_i<1.
+$$
+
+ Thus $\lambda_b$ is integral but generally differs from the rational Newton vector. Torsion Kottwitz data cannot be omitted. The weight space $V_\mu(\lambda_b)$ uses this integral weight.
+
+### 1.4. The required local property
+
+For a basic regular semisimple $\eta\in M(L)$ in a split reductive group $M$, let $\tau$ be the length-zero element of its Kottwitz class, and let $P=P_K$ be a $\tau$-stable connected parahoric. Put 
+
+$$
+\mathcal F^{\mathrm{reg}}_{P,\tau}(\eta)=
+\{gP:g^{-1}\eta g\in P\dot\tau,\
+\text{with regular reductive-coset image}\}.
+$$
+
+ Regularity means minimum centralizer dimension in the relevant component of the disconnected reductive quotient. The parahoric is *very special* when its log-volume 
+
+$$
+n_K=\ell(w_K)
+$$
+
+ is maximal among all $\tau$-stable spherical subsets. Basic means that the Newton vector is central in $M$, not that the Kottwitz class is zero.
+
+Write $\mathsf L(M)$ for the local assertion 
+
+$$
+T_\eta(L)\text{ is transitive on }
+\mathcal F^{\mathrm{reg}}_{P,\tau}(\eta)(k),
+\qquad T_\eta=Z_M(\eta)^\circ.
+$$
+
+ For regular semisimple $\eta$, $T_\eta$ is a maximal $L$-torus. The identity-component condition is necessary in upward central-isogeny transfer.
+
+### 1.5. The standard theorems used as inputs
+
+The following are the explicit standard inputs of the manuscript.
+
+1.  **He’s geometric reduction.** Use Theorems 1.3, 1.4, 2.8, and 3.2, Propositions 2.3, 2.5, and 2.7, and the component correspondences in Section 3.6. For the ordinary hyperspecial case use Theorem 3.5. Section 2 explains these uses; the integral-Newton conclusion is not applied in advance to nonintegral classes.
+
+2.  **The finite-dimensional Kostant regular quotient.** For the split orthogonal Lie algebras used here, the quotient is smooth on the regular locus, its geometric regular fibers are single special-orthogonal orbits, and regular centralizers are smooth. In even dimension the quotient includes the Pfaffian, not just the characteristic polynomial. Section 5 derives the integral consequence.
+
+3.  **The finite-dimensional Steinberg regular quotient.** For a split simply connected semisimple group in the permitted characteristic, the regular quotient is smooth, geometric regular fibers are single conjugacy orbits, and full regular centralizers are smooth. Semisimple centralizers are connected. The integral transporter consequence is proved in Section 8.
+
+4.  **Tame finite-order automorphisms.** An automorphism of a connected reductive group over an algebraically closed field, of finite order invertible in that field, stabilizes a Borel and a maximal torus therein. Its identity fixed group is reductive. Tame $H^1$ of a unipotent group is trivial; vector-group cohomology is killed by averaging. The finite proofs distinguish this stable-Borel input from the unique Borel available after regular-unipotent regularity has been proved.
+
+5.  **Tame fixed group models.** An invertible-order finite action on a smooth group scheme has a smooth fixed model. Root valuation bounds identify the connected parahoric; the fixed jet kernel is connected unipotent. Section 8 records the root parameters, reductive quotients, and full normalizer grades.
+
+6.  **The full torus Kottwitz sequence.** Over the complete strictly henselian field under consideration, the relevant torus has a surjective map 
+
+$$
+T(L)\longrightarrow X_*(T)_I.
+$$
+
+ The coinvariants include torsion. Its kernel is the connected Neron/parahoric subgroup, which need not be the whole bounded subgroup. Section 3 proves the consequence for all group Kottwitz grades.
+
+We also use Hensel’s lemma, Hilbert 90, split root-group structure, the classical regular-unipotent Jordan forms, and the finite Weyl classifications stated in Section 9. These are finite-dimensional or local-algebraic inputs, not replacement assumptions for the desired component formula.
+
+<a id="chapter-2"></a>
+
+## 2. Reduction to Local Regular-Point Transitivity
+
+### 2.1. The actual top-contributing reduction paths
+
+Set $w=w_0t^\mu$, choose a reduction tree $\mathcal T$, and let $\mathcal R$ be the paths matching $[b]$ which actually contribute to top dimension: 
+
+$$
+\ell(\mathfrak p)+\ell(\operatorname{end}(\mathfrak p))
+-\langle\nu_b,2\rho\rangle=\dim X_w(b).
+$$
+
+ The associated invariants in He, Section 1.2, make the endpoint matching conditions identical on both sides. Theorem 1.4 supplies the same dimension shift for every nonempty stratum: 
+
+$$
+\dim Y_w(\gamma)-\dim X_w(b)=\dim Y_\gamma.
+$$
+
+ Consequently the actual top-path sets agree. Theorem 2.8 and Proposition 2.5 give 
+
+$$
+\#\bigl(Z_G(\gamma)(L)\backslash
+\Sigma^{\mathrm{top}}Y_w(\gamma)\bigr)
+=\sum_{\mathfrak p\in\mathcal R}n_{\mathfrak p,\gamma},
+$$
+
+ 
+
+$$
+\#\bigl(J_b\backslash\Sigma^{\mathrm{top}}X_w(b)\bigr)
+=|\mathcal R|.
+$$
+
+ No virtual-dimension equality and no regularity of $\mu$ are assumed.
+
+### 2.2. Every actual top endpoint is very special
+
+For $\mathfrak p\in\mathcal R$, the stratum $X_{\mathfrak p}(b)$ is $J_b$-stable and locally closed, with 
+
+$$
+\dim X_{\mathfrak p}(b)=\dim X_w(b).
+$$
+
+ The closure of a top-dimensional irreducible component of the stratum is a top component of the ambient variety. Such a locally closed piece is dense open in its closure, so the stabilizers agree. Closure therefore gives a $J_b$-equivariant component injection preserving stabilizers.
+
+He, Proposition 2.3, identifies the stratum components equivariantly with the endpoint components. The flag–Grassmannian correspondence quoted in Section 3.2 identifies $\Sigma^{\mathrm{top}}X_{w_0t^\mu}(b)$ with $\Sigma^{\mathrm{top}}X_\mu(b)$. By Theorem 3.2(2), their stabilizers are very special parahorics of $J_b$. The endpoint stabilizer is the corresponding $P_{\mathfrak p}(\breve F')\cap J_b$, as in that section. Hence the endpoint parahoric is very special in the combinatorial log-volume sense.
+
+Only actual top dimension is used. In He’s cordial-path argument, cordiality supplies this dimension equality; it is not inserted here as an additional virtual-dimension hypothesis.
+
+### 2.3. Passing to the actual Newton Levi
+
+Write the endpoint as $u\tau$, with $u$ $\tau$-elliptic in $W_K$. Theorem 1.3 moves the fixed element to a basic $\eta\in M(L)$ in $P_K\dot\tau$, with the required endpoint-fiber and full-centralizer correspondences. Here $M$ is the actual split Newton Levi, including any central coupling.
+
+Proposition 2.7 and its proof show that the nonregular complement has strictly smaller dimension and identify the top components with those of the regular partial fiber. Therefore $\mathsf L(M)$ implies 
+
+$$
+n_{\mathfrak p,\gamma}=1.
+$$
+
+ To justify the passage from points to components, choose in each top component a $k$-point lying in no other component. Such open parts have $k$-points in the locally finite-type spaces involved, and the same argument applies to their mixed-characteristic perfections. A point transporter carries the unique component through the first point to the unique component through the second. Thus the identity centralizer, and hence the full centralizer, has one component orbit.
+
+### 2.4. Returning to the Grassmannian
+
+He, Section 3.6, uses the fibration from the flag strata indexed by $W_0t^\mu W_0$ to $Y_\mu(\gamma)$, with fiber $K_{\mathrm{sp}}/I$. Its general dimension comparison shows that all strata except $w_0t^\mu$ have smaller dimension; this comparison does not use integral Newton. It yields the equivariant top-component correspondence.
+
+Combining it with the Chen–Zhu formula in Theorem 3.2(1) gives 
+
+$$
+C_\mu(\gamma):=
+\#\bigl(Z_G(\gamma)(L)\backslash
+\Sigma^{\mathrm{top}}Y_\mu(\gamma)\bigr)
+=\sum_{\mathfrak p\in\mathcal R}n_{\mathfrak p,\gamma},
+\qquad
+|\mathcal R|=\dim V_\mu(\lambda_b).
+$$
+
+ It remains to establish $\mathsf L$ at every very special basic endpoint of every actual Newton Levi.
+
+<a id="chapter-3"></a>
+
+## 3. Centralizer Grades and All Reductive Central Forms
+
+### 3.1. Every Kottwitz grade occurs in the identity centralizer
+
+**Lemma 3.1.**
+
+For a split reductive $H$ and regular semisimple $\eta\in H(L)$, put $T_\eta=Z_H(\eta)^\circ$. Then 
+
+$$
+\kappa_H(T_\eta(L))=\pi_1(H).
+$$
+
+**Proof.**
+
+The full torus Kottwitz sequence gives $T_\eta(L)\twoheadrightarrow X_*(T_\eta)_I$. Over a separable closure, identify $T_\eta$ with a split maximal torus. Its lattice surjects onto the quotient by coroots $\pi_1(H)$. Inertia acts through $W(H)$, and Weyl reflections act trivially on that quotient. Hence the map factors through a surjection 
+
+$$
+X_*(T_\eta)_I\twoheadrightarrow\pi_1(H).
+$$
+
+ Kottwitz functoriality proves the assertion.
+
+$\square$
+
+Torsion cannot be discarded: a ramified quadratic norm-one torus can have coinvariants $\mathbb Z/2$, although all its points are bounded. Its connected Neron subgroup still has index two. The characteristic assumption also ensures that the inertia actions here are tame.
+
+### 3.2. The image of a finite central isogeny
+
+Let $f:H'\to H$ be a finite central isogeny of split connected reductive groups with kernel order invertible in $k$, and set 
+
+$$
+B=f_*\pi_1(H')\subset\pi_1(H).
+$$
+
+ The groups share the coroot lattice, so $f_*$ is injective. For corresponding connected parahorics $P',P$, 
+
+$$
+f(H'(L))=\kappa_H^{-1}(B),\qquad
+f(P')=P,\qquad f^{-1}(P)=P'.
+$$
+
+ Root groups lift isomorphically, Weyl representatives lift through root groups, and split-torus units lift by invertible-degree Hensel root extraction. The remaining valuation obstruction is exactly the cocharacter class modulo the shared coroot lattice. Root bounds and unit torus models coincide at corresponding parahorics. The facet-stabilizer description intersected with the Kottwitz kernel, together with injectivity on $\pi_1$, gives the inverse-image equality. Separable central isogenies preserve residue-coset regularity.
+
+### 3.3. Downward transfer: the fixed element must lift
+
+Suppose $\eta\in H(L)$ has $\kappa_H(\eta)\in B$, and choose its lift $\eta'\in H'(L)$ and compatible length-zero representatives. The preimage of the fixed target coset is the fixed source coset. For two target points $g_iP$, Lemma 3.1 gives $z_i\in T_\eta(L)$ of grade $\kappa_H(g_i)$. The adjusted representatives $z_i^{-1}g_i$ have grade zero and lift to $h_i\in H'(L)$ in the regular fiber for the fixed $\eta'$.
+
+If the source identity torus is transitive, a source transporter $c'\in Z_{H'}(\eta')^\circ(L)$ produces 
+
+$$
+z_2f(c')z_1^{-1}\in T_\eta(L)
+$$
+
+ carrying the original target points. The fixed-element condition is indispensable. Grade translation moves variable flags; it cannot change the Kottwitz class of the fixed element.
+
+### 3.4. Upward transfer for an already given source element
+
+Conversely, suppose target identity-torus transitivity is known and $\eta'\in H'(L)$ is already given. A target identity-torus transporter between the images of two source flags has grade the difference of two source-allowed grades, hence lies in $B$ and lifts. The full inverse image of the target identity torus is the source maximal torus containing $\eta'$; its lift therefore centralizes $\eta'$. The equality $f^{-1}(P)=P'$ retains the source flag coset. No connectedness of the full target centralizer is assumed.
+
+### 3.5. A split central-torus quotient
+
+Suppose 
+
+$$
+1\longrightarrow E\longrightarrow H
+\overset q\longrightarrow M\longrightarrow1
+$$
+
+ is central with $E$ split. Hilbert 90 lifts every fixed element and variable flag, and corresponding connected parahorics map onto one another. Root data give 
+
+$$
+0\longrightarrow X_*(E)\longrightarrow\pi_1(H)
+\longrightarrow\pi_1(M)\longrightarrow0.
+$$
+
+ Injectivity follows because central cocharacters have zero intersection with the rational coroot span.
+
+Lift the fixed element to $\eta_H$, and choose $\tau_H$ with its full grade. A lift $g_H$ of a target fiber point satisfies 
+
+$$
+g_H^{-1}\eta_Hg_H\in P_H\dot\tau_HE(L).
+$$
+
+ The grades on the left and of $\tau_H$ agree, so the extra $E$-factor has zero valuation and lies in $E(\mathcal O)\subset P_H$. Thus the lift belongs to the correct fixed fiber. Central-kernel dimensions add equally to actual and minimum coset-centralizer dimensions, so regularity is equivalent. Source identity-torus transitivity descends to $M$.
+
+### 3.6. A construction retaining arbitrary central coupling
+
+Let $M$ be any split connected reductive group. Let $S$ be the simply connected cover of its derived group and let $T_c=Z(M)^\circ$ be its actual embedded connected center. Write 
+
+$$
+M=(S\times T_c)/C.
+$$
+
+ The finite $C$ projects injectively to $Z(S)$, since a kernel element $(1,t_c)$ has $t_c=1$. Embed its projection into a split torus $E$, by $j$, and form 
+
+$$
+H=(S\times T_c\times E)/
+\{(s_c,t_c,j(s_c)):(s_c,t_c)\in C\}.
+$$
+
+ Then $H\to M$ has split central kernel $E$, and $H_{\mathrm{der}}=S$, since the displayed finite subgroup intersects $S\times1\times1$ trivially. The whole center of $H$ need not be connected.
+
+Put $A_H=H/H_{\mathrm{der}}$. The natural map 
+
+$$
+f:H\longrightarrow D=H_{\mathrm{ad}}\times A_H
+$$
+
+ is a finite central isogeny with kernel exactly $Z(S)$. Since $H_{\mathrm{der}}$ is simply connected, 
+
+$$
+\pi_1(H)\overset\sim\longrightarrow X_*(A_H).
+$$
+
+ Consequently its image in $\pi_1(H_{\mathrm{ad}})\times X_*(A_H)$ is a graph over the second coordinate, retaining all finite central coupling.
+
+If every simple adjoint factor satisfies the local assertion, so does its product with the split torus $A_H$; the latter translates its flag cocharacter lattice. Upward finite-isogeny transfer gives the assertion in $H$, and split-torus descent gives it in $M$. The construction applies afresh to each actual Newton Levi.
+
+The primes dividing $|Z(S)|$ divide the derived Weyl-group order and hence the ambient one, so no additional inseparable isogeny is introduced. Pure torus presentations impose no extra characteristic-degree isogeny requirement. It suffices to prove the local property for every simple adjoint type, every basic Kottwitz class, and every very special endpoint.
+
+<a id="chapter-4"></a>
+
+## 4. Types A and C
+
+This section proves the local assertions needed for types A and C. Write $O=O_L$, choose a uniformizer $t$, and normalize the valuation by $v_L(t)=1$. For a very special $\tau$-stable parahoric subgroup $P_K$, write 
+
+$$
+\mathscr Y^{\mathrm{reg}}_{K,\tau}(\gamma)
+=\{gP_K:g^{-1}\gamma g\in P_K\dot\tau,\ 
+\overline{g^{-1}\gamma g}\text{ is regular in the residual coset}\}.
+$$
+
+ Here *very special* means that the length of the longest element of the corresponding finite Weyl group is maximal among all $\tau$-stable spherical subsets. The conclusion of this section is that, for every relevant Newton Levi subgroup, the identity-component centralizer torus $T(L)=Z_G(\gamma)^\circ(L)$ acts transitively on this regular locus. The component-counting reduction of Section 2 then shows that every top-dimensional reduction path contributes $1$.
+
+All integer denominators, square roots, and finite-dimensional Jordan-form calculations for classical groups are taken under the characteristic assumptions of this manuscript. In particular, for $\mathrm{GL}_N$, all primes at most $N$ are excluded; for $\mathrm{Sp}_{2n}$ or $\mathrm{GSp}_{2n}$, the prime $2$ and all primes at most $n$ are excluded.
+
+### 4.1. All very special endpoints of a basic general linear block
+
+**Proposition 4.1.**
+
+Let $N=md$, and let $\gamma\in\mathrm{GL}_N(L)$ be regular semisimple. Suppose that all Newton slopes of its natural representation are equal to the reduced fraction $r/d$, where $d>0$ and $\gcd(r,d)=1$. Every very special endpoint is represented by an indexed periodic lattice chain 
+
+$$
+\Lambda_{i+1}\subset\Lambda_i,\qquad
+\Lambda_{i+d}=t\Lambda_i,\qquad
+\dim_k(\Lambda_i/\Lambda_{i+1})=m,\qquad i\in\mathbb Z.
+$$
+
+ The corresponding local coset condition is 
+
+$$
+\gamma\Lambda_i=\Lambda_{i+r}\qquad(i\in\mathbb Z).
+$$
+
+**Proof.**
+
+For $N\geq2$, label the vertices of the affine $A_{N-1}$ diagram by $\mathbb Z/N\mathbb Z$. Let $\omega$ be the length-zero rotation whose determinant has valuation $1$. The determinant valuation of the basic block is $mr$, so $\tau=\omega^{mr}$. Its vertex orbits are precisely the congruence classes modulo $m$, each containing $d$ vertices.
+
+Any $\tau$-stable spherical subset must omit at least one such orbit. If $q$ congruence classes are omitted, let $a_1,\ldots,a_q$ be the cyclic gaps between successive omitted vertices in a period of length $m$. Then $a_j\geq1$ and $\sum_j a_j=m$. The remaining connected components contain $d$ copies of $A_{a_j-1}$ for each $j$. The length of the longest element is therefore 
+
+$$
+n_K=d\sum_{j=1}^q\frac{a_j(a_j-1)}2.
+$$
+
+ If $q>1$, the identity 
+
+$$
+m(m-1)-\sum_j a_j(a_j-1)
+=2\sum_{i<j}a_i a_j>0
+$$
+
+ shows that this length is strictly less than $dm(m-1)/2$. Consequently, the very special subsets omit exactly one orbit. The corresponding partial complete lattice chain has $d$ steps in each period, each of length $m$, and hence has the form asserted in the proposition. Choosing a different omitted orbit merely changes the reference chain and leaves these relations unchanged.
+
+The length-zero element $\omega^{mr}$ shifts this chain by $r$ partial chain indices, so its coset condition is exactly $\gamma\Lambda_i=\Lambda_{i+r}$. If $m=1$, the remaining spherical subset is empty; if $d=1$, the subgroup is the usual hyperspecial lattice stabilizer. The rootless case $N=1$ has the same lattice description.
+
+$\square$
+
+### 4.2. A Hensel root in the fixed integral algebra
+
+We next eliminate the slope denominator entirely within linear algebra, without changing the original lattice-point problem.
+
+**Lemma 4.2.**
+
+Under the assumptions of Proposition 4.1, one can construct commuting operators $h,\pi$ from the fixed element $\gamma$ such that 
+
+$$
+\pi^d=t,\qquad \gamma=\pi^r h,\qquad
+h\in O[t^{-r}\gamma^d]^\times.
+$$
+
+ If $F=L[\pi]$, then $F/L$ is a totally ramified extension of degree $d$, $O_F=O[\pi]$, and 
+
+$$
+L[\gamma]=F[h],\qquad
+Z_{\mathrm{GL}_N(L)}(\gamma)=F[h]^\times
+=Z_{\mathrm{GL}_m(F)}(h).
+$$
+
+**Proof.**
+
+Put 
+
+$$
+\beta=t^{-r}\gamma^d,\qquad B=O[\beta].
+$$
+
+ All eigenvalues of $\beta$ are units, so its minimal polynomial has coefficients in $O$ and unit constant term. Thus $B$ is a finite, $t$-adically complete commutative $O$-algebra, and $\beta^{-1}\in B$.
+
+The quotient $B/tB$ is a finite Artinian $k$-algebra, all of whose residue fields are $k$. First choose a $d$-th root of $\beta$ in each residue field. This is possible because $k$ is algebraically closed and $d\in O^\times$. The derivative $d x^{d-1}$ is a unit at each root. These roots therefore lift uniquely across the nilpotent radical, and then lift to $B$ by Hensel’s lemma, giving 
+
+$$
+h\in B^\times,\qquad h^d=\beta.
+$$
+
+ Choose integers $a,b$ satisfying $ad+br=1$, and define 
+
+$$
+\pi=t^a\gamma^b h^{-b}.
+$$
+
+ All factors commute, so 
+
+$$
+\pi^d=t^{ad}\gamma^{bd}\beta^{-b}
+=t^{ad+br}=t,
+$$
+
+ and 
+
+$$
+\pi^r h=t^{ar}\gamma^{br}h^{1-br}
+=t^{ar}\gamma^{br}h^{ad}
+=\gamma^{br+ad}=\gamma.
+$$
+
+ The polynomial $X^d-t$ is Eisenstein. Hence $F=L[\pi]$ is the stated field and $O_F=O[\pi]$. The original vector space $V$ becomes an $m$-dimensional $F$-vector space.
+
+Let $A=L[\gamma]$. Since $h\in B\subset A$ and $\pi\in A$, we have $F[h]\subset A$. The equality $\gamma=\pi^r h$ gives the reverse inclusion. Regular semisimplicity of $\gamma$ means that $A$ is an étale $L$-algebra of dimension $N$ and has a cyclic vector on $V$. Thus $A=F[h]$ has $F$-dimension $m$, and $h$ is a regular semisimple operator on the $m$-dimensional $F$-space.
+
+An $L$-linear operator commuting with $\gamma$ also commutes with $\beta,h,\pi$. Conversely, an $F$-linear operator commuting with $h$ commutes with $\gamma$. This proves the centralizer equalities.
+
+$\square$
+
+### 4.3. Exact transitivity from cyclic lattices
+
+**Proposition 4.3.**
+
+For every basic slope of $\mathrm{GL}_N$ and every very special endpoint, $Z_{\mathrm{GL}_N}(\gamma)(L)$ acts transitively on $\mathscr Y^{\mathrm{reg}}_{K,\tau}(\gamma)$.
+
+**Proof.**
+
+Suppose that a lattice chain satisfies Proposition 4.1. Periodicity and the shift relation for $\gamma$ give 
+
+$$
+\beta\Lambda_i=t^{-r}\gamma^d\Lambda_i=\Lambda_i.
+$$
+
+ Thus $B$ preserves every $\Lambda_i$, and $h,h^{-1}\in B$ imply $h\Lambda_i=\Lambda_i$. The formula in Lemma 4.2 consequently yields 
+
+$$
+\pi\Lambda_i=\Lambda_{i+ad+br}=\Lambda_{i+1}.
+$$
+
+ The entire chain is therefore determined by one $O_F$-lattice: 
+
+$$
+\Lambda_i=\pi^i\Lambda_0,\qquad h\Lambda_0=\Lambda_0.
+$$
+
+ Conversely, any $h$-stable $O_F$-lattice $\Lambda$ gives the original lattice chain $\pi^i\Lambda$, with the prescribed periodicity, quotient dimensions, and shift by $\gamma$. This is an equivariant bijection between the original lattice chains and $h$-stable $O_F$-lattices. The choices of $F,h$ have been made once from the fixed $\gamma$ and do not vary with the lattice.
+
+We now compare regularity. The reductive quotient of the original parahoric is $(\mathrm{GL}_m)^d$, and $\tau$ cyclically permutes its $d$ factors. The centralizer equations for an element of this cyclic coset determine the coordinates on successive factors, leaving only the equation of commuting with the product around the cycle. Thus the coset element is regular if and only if its product around the cycle is regular in $\mathrm{GL}_m(k)$. Here that product is the reduction of $\beta=\gamma^d/t^r=h^d$ on 
+
+$$
+\Lambda_0/\pi\Lambda_0.
+$$
+
+ Since $h\in O[\beta]$ and $\beta=h^d$, the operators on this quotient satisfy 
+
+$$
+k[\bar h]=k[\bar\beta].
+$$
+
+ Their centralizers are equal. Hence residual coset regularity is equivalent to $\bar h$ being a regular matrix, or equivalently to its minimal polynomial being equal to its characteristic polynomial.
+
+Put $R=O_F[h]$. On a regular lattice, choose a cyclic vector for $\bar h$ and lift it to $v\in\Lambda_0$. Nakayama’s lemma shows that 
+
+$$
+v,hv,\ldots,h^{m-1}v
+$$
+
+ is an $O_F$-basis of $\Lambda_0$, so $\Lambda_0=Rv$. The vector $v$ is also a generator of the generic-fiber $A=F[h]$-module. For any two such lattices $Rv,Rv'$, there is a unique $z\in A^\times$ such that $zv=v'$. Therefore 
+
+$$
+z\Lambda_0=\Lambda'_0,\qquad
+z\Lambda_i=\Lambda'_i\qquad(i\in\mathbb Z).
+$$
+
+ Lemma 4.2 identifies $z$ as an element of the centralizer of the original $\gamma$. This centralizer consequently acts transitively on all regular lattice chains. Moreover, starting with any generic-fiber cyclic vector and taking the lattice $Rv$ gives an integral companion matrix with cyclic reduction, proving that this regular locus is nonempty.
+
+$\square$
+
+This argument uses $F$-linear algebra internal to the original problem. It does not identify the number of affine Springer fiber components after an arbitrary ramified extension with the original component count. All lifts use only a complete discrete valuation ring, so the argument also applies in mixed characteristic.
+
+### 4.4. Newton Levi subgroups of $\mathrm{GL}_n$ and $\mathrm{Sp}_{2n}$
+
+**Proposition 4.4.**
+
+Every Newton point of $\mathrm{GL}_n$ and $\mathrm{Sp}_{2n}$ satisfies the local transitivity assertion of this section.
+
+**Proof.**
+
+The Newton Levi subgroup of $\mathrm{GL}_n$ is an actual direct product of its slope blocks: 
+
+$$
+M=\prod_j\mathrm{GL}_{a_j}.
+$$
+
+ Each block is basic, and its slope denominator divides its dimension. The affine root system is the disjoint union of those of the factors, and the longest-element lengths add. A $\tau$-stable parahoric is therefore very special if and only if its parahoric in each factor is very special. Residual coset regularity and the centralizer action also decompose factor by factor. Proposition 4.3 gives transitivity on each factor.
+
+For $\mathrm{Sp}_{2n}$, the positive- and negative-slope spaces are symplectic duals of one another, and the zero-slope space is symplectic. Its actual Newton Levi subgroup is 
+
+$$
+M=\left(\prod_j\mathrm{GL}_{a_j}\right)\times\mathrm{Sp}_{2c}.
+$$
+
+ A factor $\mathrm{GL}_{a_j}$ acts by $A$ on the positive-slope space and by $A^{-T}$ on its negative-slope dual. There is no additional determinant condition or finite central constraint. The general linear factors are handled by Proposition 4.3; their denominators $d_j\leq a_j\leq n$ are invertible in $O$.
+
+The remaining symplectic factor has slope zero. Since $\mathrm{Sp}_{2c}$ is simply connected, its length-zero group $\Omega$ is trivial, and the endpoint element $\tau$ acts as the identity on this factor. Deleting vertex $i$ from the affine $C_c$ diagram leaves finite type $C_i\times C_{c-i}$, whose longest-element length is 
+
+$$
+i^2+(c-i)^2.
+$$
+
+ The maximum $c^2$ occurs only at $i=0,c$. Deleting further vertices strictly decreases the number of positive roots. Thus the very special endpoints are exactly the two hyperspecial endpoints.
+
+He’s hyperspecial local theorem recalled above gives transitivity on regular lattices at the standard hyperspecial endpoint. The $L$-group automorphism given by conjugation by the symplectic similitude $\operatorname{diag}(tI_c,I_c)$ interchanges the two endpoints, so the other endpoint is also covered. After moving an endpoint coset element into the standard hyperspecial subgroup, choose a stable complete isotropic flag in its reductive quotient to conjugate it into an Iwahori subgroup. This gives the form required by He’s theorem. If $c=0$, there is no symplectic factor to handle.
+
+Taking the product of the transitive actions on the general linear factors and the zero-slope symplectic factor proves the local assertion for every Newton Levi subgroup. Regular semisimple centralizers in $\mathrm{GL}$ and $\mathrm{Sp}$ are connected maximal tori, so the transporters obtained here belong to the identity-component centralizers.
+
+$\square$
+
+### 4.5. Symplectic similitudes: even multiplier valuations and odd endpoints
+
+To handle all central forms of type C, one needs $\mathrm{GSp}_{2n}$, rather than just $\mathrm{Sp}_{2n}$. On a symplectic space $V$, write $x^\star$ for the adjoint with respect to the fixed alternating form. For $\Gamma\in\mathrm{GSp}(V)$, its multiplier $c$ satisfies 
+
+$$
+\Gamma^\star\Gamma=cI.
+$$
+
+ The Kottwitz invariant of $\mathrm{GSp}_{2n}$ is $r=v_L(c)\in\mathbb Z$. If $\Gamma$ is basic, all slopes of its natural representation are $r/2$.
+
+If $r$ is even, first multiply by the central element $t^{-r/2}$, and then by a central unit, to make the multiplier equal to $1$. The required square root of a unit exists by Hensel’s lemma. The adjusted element lies in $\mathrm{Sp}_{2n}$ and has slope zero. In this case, the length-zero element acts trivially on the affine $C_n$ diagram, and all very special endpoints are the two hyperspecial endpoints. He’s hyperspecial local theorem can therefore be applied directly to $\mathrm{GSp}_{2n}$. Lifting a stable isotropic flag of the reduced element conjugates the normalized element into an Iwahori subgroup. The two hyperspecial types are interchanged by conjugation in the symplectic similitude group. This theorem applies directly to the entire regular locus in $\mathrm{GSp}/P_K$, including all central components. Central multiplication adjusts the associated $\tau$ at the same time and preserves the local problem for regular points.
+
+Henceforth suppose that $r$ is odd. By multiplying by a suitable central unit, we can, once and for all, arrange that 
+
+$$
+c=-t^r,\qquad \Gamma^\star=-t^r\Gamma^{-1}.
+$$
+
+ A central unit belongs to every connected parahoric subgroup, so this normalization changes neither the relevant fiber nor residual coset regularity.
+
+The nontrivial length-zero action sends vertex $i$ of the affine $C_n$ diagram to $n-i$. The maximal $\tau$-stable spherical subsets are obtained by deleting one vertex orbit; deleting further orbits strictly decreases the longest-element length. Deleting $\{j,n-j\}$, where $0\leq j<n/2$, leaves type 
+
+$$
+C_j\times A_{n-2j-1}\times C_j,
+$$
+
+ with length 
+
+$$
+f(j)=2j^2+\frac{(n-2j-1)(n-2j)}2.
+$$
+
+ This is a strictly convex quadratic polynomial, so it suffices to compare the two ends of the allowable interval.
+
+If $n=2m$, one may also delete the single middle vertex $m$. The resulting type $C_m\times C_m$ has length $2m^2$. The largest value among the other candidates is at most 
+
+$$
+\max\{f(0),f(m-1)\}
+=\max\{m(2m-1),2(m-1)^2+1\}<2m^2.
+$$
+
+ Thus the unique very special subset deletes the middle vertex. If $n=2m+1\geq3$, then 
+
+$$
+f(0)=m(2m+1)>2m^2=f(m),
+$$
+
+ so the unique very special subset deletes the endpoint pair $\{0,n\}$, leaving type $A_{n-1}$. For $n=1$, this subset is empty, as expected from $\mathrm{GSp}_2=\mathrm{GL}_2$.
+
+### 4.6. Self-dual indexed two-step lattice chains
+
+In the natural representation, both of the preceding kinds of odd-valuation endpoints are described by two-step chains satisfying 
+
+$$
+\Lambda_{i+2}=t\Lambda_i,\qquad
+\dim_k(\Lambda_i/\Lambda_{i+1})=n,\qquad
+\Gamma\Lambda_i=\Lambda_{i+r}.
+$$
+
+ If $\Lambda^*$ denotes the lattice dual with respect to the symplectic form, they also satisfy 
+
+$$
+\Lambda_i^*=t^{-q}\Lambda_{a-i},
+$$
+
+ where $a$ is fixed, while the integer $q$ may vary with the flag point. The indexing can be chosen with $a=1$ for even $n$ and $a=0$ for odd $n$.
+
+For even $n$, the reference middle lattice satisfies 
+
+$$
+t\Lambda_0^*\subset\Lambda_0\subset\Lambda_0^*,\qquad
+\Lambda_1=t\Lambda_0^*.
+$$
+
+ Both steps have length $n$, and the duality formula above holds with $q=1,a=1$. For odd $n$, the reference endpoint chain can be chosen with $\Lambda_0$ self-dual and with $\Lambda_1^*=t^{-1}\Lambda_1$, in which case $q=0,a=0$. Applying an arbitrary similitude changes only the common exponent $q$, without changing $a$. The unit part of its multiplier has no effect on equalities between lattices.
+
+These indexed chains represent precisely the points of $\mathrm{GSp}/P_K$. Indeed, if $g$ fixes the lattice at every index, then $v_L(\det g)=0$. Since 
+
+$$
+\det g=\operatorname{sim}(g)^n,
+$$
+
+ its multiplier has valuation zero, and its Kottwitz invariant is zero. The elements fixing this facet and having zero Kottwitz invariant are exactly the connected parahoric subgroup. Conversely, this connected parahoric fixes the entire indexed chain. Equality of lattice chains therefore loses no additional connected-component label.
+
+### 4.7. Residual regularity implies cyclicity in both odd-valuation cases
+
+Put 
+
+$$
+\beta=t^{-r}\Gamma^2.
+$$
+
+ It preserves each lattice, and its reduction on $\Lambda_0/\Lambda_1$ is the product around the cycle of the two-step coset.
+
+**Lemma 4.5.**
+
+If the residual coset element of this $\mathrm{GSp}$ lattice chain is regular, then $\bar\beta$ is a cyclic matrix on the $n$-dimensional quotient.
+
+**Proof.**
+
+If $n$ is even, the semisimple part of the reductive quotient is $\mathrm{Sp}_n\times\mathrm{Sp}_n$, and $\tau$ interchanges the two factors. The central similitude factor adds the same one dimension to every centralizer. Solving the two commutation equations shows that coset regularity is equivalent to ordinary regularity of the product around the cycle in $\mathrm{Sp}_n$.
+
+An ordinary regular element of a symplectic group is cyclic in its natural representation. To see this, decompose according to the eigenvalues of its semisimple part. Reciprocal eigenvalue pairs different from $\pm1$ give general linear factors, while the $+1$ and $-1$ eigenspaces give symplectic factors. Regularity forces the unipotent part to be regular unipotent in every factor. Each natural eigenspace of a general linear factor has one Jordan block, and the natural representation of each symplectic factor also has one Jordan block of even size. Thus the full matrix has exactly one Jordan block for each eigenvalue and is cyclic.
+
+If $n$ is odd, the reductive quotient can be written as $\mathrm{GL}_n\times\mathbb G_m$, and the length-zero action is 
+
+$$
+(A,c)\longmapsto(cA^{-T},c).
+$$
+
+ After separating the fixed central similitude direction, this is the transpose-inverse twisted coset of $\mathrm{GL}_n$. In an isotropic decomposition, take the reference representative 
+
+$$
+\dot\tau=
+\begin{pmatrix}0&tI\\ I&0\end{pmatrix},\qquad
+\operatorname{sim}(\dot\tau)=-t.
+$$
+
+ Representing a residual element by $\operatorname{diag}(A,A^{-T})$, its product around the cycle is $AA^{-T}$, the asymmetry operator of the corresponding nondegenerate bilinear form. Every odd $r$ differs from this representative by a central translation, so it gives the same finite-dimensional problem.
+
+Suppose that the $+1$ and $-1$ eigenspaces of the semisimple asymmetry operator have dimensions $n_+,n_-$, respectively, and that one side of a reciprocal eigenvalue pair $\{\lambda,\lambda^{-1}\}$, with $\lambda\ne\pm1$, has dimension $n_\lambda$. The identity component of the centralizer of the twisted semisimple element is 
+
+$$
+\mathrm{SO}_{n_+}\times\mathrm{Sp}_{n_-}
+\times\prod_{\{\lambda,\lambda^{-1}\}}\mathrm{GL}_{n_\lambda}.
+$$
+
+ Indeed, the bilinear form is symmetric on the $+1$ space, alternating on the $-1$ space, and pairs the reciprocal spaces nondegenerately. Hence $n_-$ is even. Since the total dimension $n$ is odd, $n_+$ must be odd. The sum of the ranks of these factors is always 
+
+$$
+\frac{n_+-1}2+\frac{n_-}2+\sum n_\lambda
+=\frac{n-1}2,
+$$
+
+ which is the smallest possible centralizer dimension in this twisted coset. Coset regularity therefore forces the unipotent part to be regular in each factor.
+
+The natural Jordan type of a regular unipotent element is $(n_+)$ in the odd-dimensional orthogonal factor and $(n_-)$ in the symplectic factor, while each general linear natural space has a single block. When the twisted element is squared to obtain the asymmetry operator, its unipotent part is squared. Since $2$ is invertible, this does not change its Jordan block sizes. Thus $\bar\beta$ still has exactly one Jordan block for each eigenvalue.
+
+The crucial point is that $n_+$ is odd, so the regular but noncyclic type $(2a-1,1)$ that can occur in an even-dimensional orthogonal group does not arise. The disconnectedness of the full orthogonal centralizer changes neither its dimension nor the unipotent calculation in its identity component. The classical Jordan types used here are valid in the characteristic range of this manuscript. This proves the lemma.
+
+$\square$
+
+### 4.8. An integral square root compatible with the adjoint
+
+The normalization $\Gamma^\star=-t^r\Gamma^{-1}$ gives 
+
+$$
+\beta^\star=\beta^{-1}.
+$$
+
+ Thus $B=O[\beta]$ is a finite complete commutative algebra, $\beta\in B^\times$, and $\star$ preserves $B$. It sends the local factor with residual eigenvalue $\lambda$ to the local factor with residual eigenvalue $\lambda^{-1}$.
+
+Define $\epsilon\in B$ to be $-1$ on the local factor with residual eigenvalue $-1$, and $+1$ on every other factor. Idempotents in the complete algebra lift uniquely from the reduction, so 
+
+$$
+\epsilon^2=1,\qquad \epsilon^\star=\epsilon.
+$$
+
+ On distinct reciprocal factors, choose reciprocal residual square roots. On the $+1$ factor choose $1$, and on the $-1$ factor choose an element $i\in k$ satisfying $i^2=-1$. Hensel lifting, with unit derivative $2h$, gives 
+
+$$
+h\in B^\times,\qquad h^2=\beta,\qquad
+h^\star=\epsilon h^{-1}.
+$$
+
+ The last equality follows from uniqueness of the lift of the prescribed residual roots: on the $-1$ factor, both $h^\star$ and $-h^{-1}$ reduce to $i$ and have square $\beta^{-1}$; on the other factors, the roots were chosen reciprocally.
+
+Choose integers $a_0,b_0$ satisfying $2a_0+b_0r=1$. Since $r$ is odd, $b_0$ is odd. Define 
+
+$$
+\pi=t^{a_0}\Gamma^{b_0}h^{-b_0}.
+$$
+
+ Here we reuse only the commutative-algebra calculation in Lemma 4.2 with $d=2$. It requires only that $2$ be invertible, not that $p\nmid(2n)!$. We obtain 
+
+$$
+\pi^2=t,\qquad \Gamma=\pi^r h.
+$$
+
+ Since $b_0$ is odd, the adjoint identities also yield 
+
+$$
+\pi^\star\pi
+=(-1)^{b_0}\epsilon^{-b_0}t^{2a_0+b_0r}
+=-\epsilon t,
+$$
+
+ and hence 
+
+$$
+\pi^\star=-\epsilon\pi.
+$$
+
+ Therefore $F=L[\pi]$ is a totally ramified quadratic field inside the original operator algebra, $O_F=O[\pi]$, and all relevant lattice chains satisfy 
+
+$$
+\Lambda_i=\pi^i\Lambda_0.
+$$
+
+ A regular semisimple $\mathrm{GSp}$ element has distinct eigenvalues in its natural representation: a repeated reciprocal eigenspace would give a nontoral general linear centralizer, and an eigenspace satisfying $\lambda^2=c$ would give a nontoral symplectic centralizer. Consequently, 
+
+$$
+A=L[\Gamma]=F[h]
+$$
+
+ is an étale $L$-algebra of dimension $2n$, and is also the full commutative centralizer algebra on the $n$-dimensional $F$-space. Put 
+
+$$
+R=O_F[h].
+$$
+
+ Since $\epsilon\in O[\beta]=O[h^2]$, $h^{-1}\in R$, and $h^\star=\epsilon h^{-1}$, $\pi^\star=-\epsilon\pi$, the integral algebra $R$ is preserved by the adjoint. The adjoint need not act in the same way on $F$ in all factors of $A$; the proof requires only stability of $R$.
+
+Lemma 4.5, together with $k[\bar h]=k[\bar\beta]$, shows that $\bar h$ is cyclic. Lifting a cyclic vector $v$ gives 
+
+$$
+\Lambda_0=Rv.
+$$
+
+ In particular, the multiplier ring of $\Lambda_0$ in $A$ is exactly $R$: if $a\Lambda_0\subset\Lambda_0$, then $av\in Rv$, and because $v$ is a generic-fiber generator, $a\in R$. If the lattices are equal, then $a\in R^\times$.
+
+### 4.9. Integral norm correction and $\mathrm{GSp}$ transitivity
+
+**Proposition 4.6.**
+
+For every basic Kottwitz class of $\mathrm{GSp}_{2n}$, including the classes with odd multiplier valuation, the identity-component centralizer torus acts transitively on the regular points at every very special endpoint.
+
+**Proof.**
+
+The even classes were handled in Subsection 4.5. Suppose that two regular points in an odd class are represented by chains $\Lambda_i,\Lambda'_i$, whose duality exponents are $q,q'$, respectively. Both initial lattices are rank-one cyclic $R$-modules, so there exists 
+
+$$
+z\in A^\times,\qquad z\Lambda_0=\Lambda'_0.
+$$
+
+ Since $z$ commutes with $\pi$, it carries the entire indexed chain to the other one. The adjoint also preserves $A$, so $z^\star\in A$. Using 
+
+$$
+(z\Lambda_0)^*=(z^\star)^{-1}\Lambda_0^*
+$$
+
+ and $\Lambda_0^*=t^{-q}\pi^a\Lambda_0$, $(\Lambda'_0)^*=t^{-q'}\pi^a\Lambda'_0$, and canceling the commuting factor $\pi^a$, gives 
+
+$$
+z^\star z\Lambda_0=t^{q'-q}\Lambda_0.
+$$
+
+ Hence 
+
+$$
+u=t^{-(q'-q)}z^\star z\in R^\times,\qquad u^\star=u.
+$$
+
+ Membership $u\in R^\times$ follows from the multiplier-ring property just proved.
+
+Every $\star$-fixed unit $u\in R^\times$ has a $\star$-fixed inverse square root. More explicitly, choose compatible residual square roots of $u^{-1}$ on the orbits of the residual maximal ideals of $R$. At a fixed ideal the residue field is $k$, and $\star$ acts as the identity on that field, so both square roots are fixed. For a pair of exchanged ideals, carry the root on one side to the other. Lift successively across the nilpotent radical and through the complete topology by Hensel’s lemma. The derivative is a unit, and uniqueness of the lift of the prescribed residual roots gives 
+
+$$
+w\in R^\times,\qquad w^\star=w,\qquad w^2=u^{-1}.
+$$
+
+ Set $g=zw$. Since $w$ is a unit automorphism of every $\pi^i\Lambda_0$, the element $g$ still carries the original entire chain to the other one, while 
+
+$$
+g^\star g
+=w^\star z^\star zw
+=t^{q'-q}u w^2
+=t^{q'-q}I.
+$$
+
+ Thus $g\in\mathrm{GSp}_{2n}(L)$. It lies in $A^\times$, so it commutes with $\Gamma$. Subsection 4.6 showed that the stabilizer of the indexed chain is exactly the connected parahoric subgroup. Consequently, $g$ is a transporter between the original two points of $\mathrm{GSp}/P_K$. The derived group of $\mathrm{GSp}$ is simply connected, and a regular semisimple centralizer is a connected maximal torus. Hence $g$ belongs to the required identity-component centralizer.
+
+$\square$
+
+The entire odd-class argument requires only that $O$ be complete and that $2$ be invertible. Even when $F/L$ is ramified in mixed characteristic, no additional geometric transitivity theorem over $F$ is invoked.
+
+### 4.10. All central forms of types A and C and all Newton points
+
+The actual Newton Levi subgroup of $\mathrm{GSp}_{2n}$ is 
+
+$$
+M=\left(\prod_j\mathrm{GL}_{a_j}\right)\times\mathrm{GSp}_{2c},
+$$
+
+ where for $c=0$ the last factor is $\mathbb G_m$. If the multiplier of the last factor is $c_0$, then a general linear factor acts by $A$ on the space of positive slope relative to the central slope and by $c_0A^{-T}$ on its paired space. This gives independent direct-product coordinates without any determinant or finite central constraint. Consequently, Propositions 4.3 and 4.6, together with the factorwise decomposition of regularity and maximal longest-element length, prove local transitivity for all Newton points of $\mathrm{GSp}$.
+
+The adjoint groups of types A and C are obtained, respectively, from 
+
+$$
+\mathrm{GL}_{a}\longrightarrow\mathrm{PGL}_{a},\qquad
+\mathrm{GSp}_{2c}\longrightarrow\mathrm{PSp}_{2c},
+$$
+
+ both with split scalar torus kernel. The proof by lifting fixed cosets in Section 3 descends the local property to these adjoint groups, including every Kottwitz class. Applying the natural central extension and graph isogeny from that section to every actual Newton Levi subgroup then gives all central forms of types A and C: forms with simply connected derived group, adjoint forms, extensions by central tori, and central quotient gluings between different factors.
+
+In the finite-cover step, only transporters whose Kottwitz invariants already belong to the image of the source are lifted; the fixed element is first lifted through a split torus kernel. Thus the argument neither assumes that an odd similitude class lifts directly to $\mathrm{Sp}$ nor omits any finite central grading.
+
+Combining this with the reduction of Section 2, every top-dimensional path has $n_{p,\gamma}=1$, and hence all these groups satisfy 
+
+$$
+\#\left(Z_G(\gamma)(L)\backslash
+\Sigma^{\mathrm{top}}Y_\mu(\gamma)\right)
+=\dim V_\mu(\lambda_b).
+$$
+
+ Here the full Kottwitz information in $\lambda_b$ is retained; it has not been replaced by the Newton vector, which may be nonintegral.
+
+<a id="chapter-5"></a>
+
+## 5. Ordinary and Vector Classes in Types B and D
+
+This section proves the local assertion at every Newton point for the actual split group $SO_N$. Here the *vector class* means the nonzero Kottwitz class of $SO_N$; it is distinct from the half-spin classes of the even-dimensional adjoint group, which are treated separately in the next section. Let $\mathcal O$ be the original discrete valuation ring, let $t$ be a uniformizer, and put $L=\operatorname{Frac}(\mathcal O)$. Its residue field $k$ is algebraically closed. Apart from the trivial-group and torus cases $SO_1$ and $SO_2$, the characteristic hypothesis of this section ensures that $2\in\mathcal O^\times$.
+
+### 5.1. The actual Newton Levi and the required local assertion
+
+In a standard hyperbolic basis, decompose the standard representation into the positive, negative, and zero weight spaces of the Newton cocharacter. The matrices that preserve the quadratic form and commute with this cocharacter act by $A_j$ on each positive weight space, by ${}^tA_j^{-1}$ on the corresponding negative weight space, and by a special orthogonal matrix on the zero weight space. The product of the determinants on every positive–negative pair is one. Consequently, 
+
+$$
+M_\nu\simeq\prod_j GL_{a_j}\times SO_d
+$$
+
+ is an actual direct product: there is neither a hidden determinant constraint nor a finite central quotient. The quadratic space of weight zero consists of standard hyperbolic pairs, together with the standard one-dimensional space in odd dimension, and remains split. The distinction between the two end-node embeddings of type $A$ Levi subgroups in an even orthogonal group does not change this direct-product conclusion. We interpret $SO_0$ and $SO_1$ as trivial factors, and $SO_2\simeq\mathbb G_m$.
+
+Local transitivity on regular points for the $GL$ factors has already been proved by the cyclic-lattice argument. Thus it remains to prove the following assertion for a basic element $\gamma\in SO_N(L)$: at every very special endpoint $P\tau$ associated with $\gamma$, the points of the regular part of the partial affine Springer fiber form a single orbit under 
+
+$$
+T(L),\qquad T=Z_{SO_N}(\gamma)^\circ.
+$$
+
+ Throughout this section we use this identity-component torus; we do not assume that the full group centralizer is connected. Once the assertion is proved, He’s local component theorem gives $n_{p,\gamma}=1$ for every actual top-dimensional reduction path. The path-counting formula then gives the conclusion for $SO_N$.
+
+### 5.2. All very special endpoints for the ordinary and vector classes
+
+First suppose that $N\geq3$. In the standard coordinates $e_1,\ldots,e_r$, the cocharacter and coroot lattices of the actual groups $SO_{2r+1}$ and $SO_{2r}$ are 
+
+$$
+X_*(T_0)=\mathbb Z^r,\qquad
+ Q^\vee=\left\{(a_i)\in\mathbb Z^r:
+                       \sum_i a_i\equiv0\pmod2\right\}.
+$$
+
+ Hence $\pi_1(SO_N)=\mathbb Z/2$. Its nonzero class is represented by $e_1$, whose action on the affine diagram is 
+
+$$
+B_r:\ (0\ 1),\qquad
+ D_r:\ (0\ 1)(r-1\ r).
+$$
+
+ For $B_1=A_1$, it exchanges the two affine vertices. For $D_2=A_1\sqcup A_1$, it simultaneously exchanges the two vertices in each of the two affine $A_1$ components. In particular, the affine $D_2$ diagram must not be treated as a connected three-vertex diagram.
+
+The very special condition compares the numbers of positive roots of stable spherical root subsets. The action of the ordinary class is the identity. For $B_r$, the maximum is $r^2$, attained by deleting $0$ or $1$; for $D_r$, it is $r(r-1)$, attained by deleting any one of the four end vertices. These are precisely the hyperspecial types. The diagram $B_1$ has two such vertices. For $D_2$, one deletes one vertex from each affine $A_1$ component, giving four possibilities, each with two positive roots.
+
+For the nonzero class, every stable spherical root subset is contained in the root subset obtained by deleting one whole vertex orbit. Further deletion of vertices strictly decreases the number of positive roots, so it suffices to compare deletions of a single orbit. In $B_r$, for $r\geq2$, deleting $\{0,1\}$ leaves $(r-1)^2$ positive roots; deleting a fixed vertex $j$, with $2\leq j\leq r$, leaves 
+
+$$
+f_B(j)=j(j-1)+(r-j)^2.
+$$
+
+ This function is strictly convex. Comparing its two endpoints shows that the unique maximum is attained at $j=r$, where its value is $r(r-1)$, and the remaining root system is $D_r$. Here $D_2=A_1\sqcup A_1$ and $D_3=A_3$. In $D_r$, for $r\geq4$, deleting either $\{0,1\}$ or $\{r-1,r\}$ leaves $(r-1)(r-2)$ positive roots, with remaining root system $D_{r-1}$. Deleting a fixed interior vertex gives 
+
+$$
+f_D(j)=j(j-1)+(r-j)(r-j-1),
+                  \qquad 2\leq j\leq r-2.
+$$
+
+ Its maximum, $2+(r-2)(r-3)$, is smaller than the end-orbit value by $2r-6>0$. Thus only the two end orbits give the maximum. The affine diagram of $D_3=A_3$ is a square, and the vector action exchanges the two pairs of opposite vertices. Deleting either orbit leaves $A_1\sqcup A_1$, and both choices are maximal. For $B_1$ and $D_2$, the only stable spherical subset is empty, and the connected reductive quotients are respectively $SO_2$ and $SO_2\times SO_2$.
+
+The hyperspecial models for the ordinary class are self-dual lattices. In even dimension, one may also obtain a $t$-modular lattice satisfying $\Lambda^*=t^{-1}\Lambda$. Replacing the quadratic form $B$ by $t^{-1}B$ makes such a lattice self-dual; moreover, $SO(B)=SO(t^{-1}B)$, and the generic fiber remains split. This rescaling includes all the even orthogonal hyperspecial types.
+
+The lattice models for maximal endpoints in the nonzero class have the uniform form 
+
+$$
+\Lambda=U_{\mathcal O}\perp W_{\mathcal O},\qquad
+ B|_\Lambda=B_0\perp tB_1,
+$$
+
+ where $B_0$ and $B_1$ are unimodular, with dimensions as follows.
+
+<div class="center">
+
+| Group                 | $(\dim U,\dim W)$        | Root system of the connected reductive quotient |
+|:----------------------|:-------------------------|:------------------------------------------------|
+| $SO_{2r+1}$, $r\geq1$ | $(1,2r)$                 | $D_r$; a torus for $r=1$                        |
+| $SO_{2r}$, $r\geq3$   | $(2r-2,2)$ or $(2,2r-2)$ | $D_{r-1}$                                       |
+| $SO_4$                | $(2,2)$                  | A torus                                         |
+
+</div>
+
+These lattices exist in the split generic fiber: an even-dimensional unimodular space is hyperbolic, and multiplying its form by $t$ again gives a hyperbolic space. For each fixed row of the table, the lattices of that model form one $SO_N(L)$-orbit. First match them by an orthogonal isometry, and then correct the determinant to one using a reflection in a unimodular vector that preserves the target lattice.
+
+The full lattice stabilizer has reductive quotient 
+
+$$
+S\bigl(O(B_0)\times O(B_1)\bigr),
+$$
+
+ in which the determinant signs of the two factors agree. Its kernel is connected unipotent, and the connected parahoric $P$ has reductive quotient $SO(B_0)\times SO(B_1)$. Consequently the full stabilizer modulo $P$ has exactly two cosets; the nontrivial coset has signs $(-1,-1)$. This sign is precisely the Kottwitz class for $SO$. Indeed, all units of $\mathcal O$ are squares, and the product of one reflection in a vector of unit norm and one reflection in a vector of norm $t$ times a unit has determinant one and spinor norm of odd valuation. Thus each such lattice has exactly two connected-parahoric flag decorations, and both must be handled at the end.
+
+### 5.3. The ordinary regular lattice lemma over an auxiliary complete DVR
+
+**Lemma 5.1 (Ordinary regular lattice lemma).**
+
+Let $R$ be a complete DVR with algebraically closed residue field and fraction field $E$, satisfying the characteristic hypothesis of this section. The ring $R$ is allowed to be a ramified extension of the original valuation ring. Let $(V,B)$ be a split quadratic $E$-space, and let $x\in SO(V)(E)$ be regular semisimple. Suppose that the self-dual lattices $L_1,L_2$ are preserved by $x$, and that $\bar x$ is regular in the special orthogonal group of each lattice. Then there exists 
+
+$$
+h\in Z_{SO(V)}(x)^\circ(E),\qquad hL_1=L_2.
+$$
+
+ For any such lattice $L$, the stabilizer of $L$ in the generic identity-component centralizer torus has an intrinsically defined smooth affine $R$-model $J$. Its special fiber contains $Z_{SO(L/\varpi L)}(\bar x)^\circ$. If a finite-order semilinear automorphism preserves $B,x,L$, then the construction of $J$ is equivariant for this automorphism.
+
+**Proof.**
+
+Since $x$ preserves the lattices, its characteristic polynomial lies in $R[X]$ and has unit constant term. The pairwise coprime factors corresponding to the residual eigenvalues have unique Hensel lifts. The associated Bézout idempotents lie in $R[x]$, and therefore decompose both lattices into intrinsic spectral clusters $L_{i,\lambda}$. The quadratic form pairs the $\lambda$-cluster with the $\lambda^{-1}$-cluster; the lattices in a non-self-reciprocal pair are dual to each other.
+
+If $\lambda\ne\pm1$, regularity makes $\bar x$ a regular $GL_d$-matrix on that cluster, so it has a cyclic vector. Lift such a residual cyclic vector to $v_i$. Nakayama’s lemma gives 
+
+$$
+L_{i,\lambda}=R[x]v_i.
+$$
+
+ On the generic fiber, take the $E[x]$-linear map sending $v_1$ to $v_2$, and take its inverse transpose on the dual cluster. The resulting map has determinant one and belongs to the generic identity-component centralizer. The stabilizer model on this cluster is the unit group $A^\times$ of the finite free algebra $A=R[x|_{V_\lambda}]$. It is the unit open subset of the underlying affine space, hence is smooth; its special fiber is the corresponding $GL$-centralizer.
+
+The residual $+1$ and $-1$ clusters are individually unimodular. Since $2$ is invertible and every unit has a square root by Hensel’s lemma, their quadratic forms are split over $R$. On the $+1$ cluster take $y=x$, and on the $-1$ cluster take $y=-x$. The negative cluster has even dimension: the determinants on the other pairs of reciprocal spectral clusters are one, and $\det\bar x=1$ forces the dimension of the negative cluster to be even. Thus both choices of $y$ belong to the appropriate special orthogonal group. The operator $y+1$ is a lattice automorphism, so the Cayley transform 
+
+$$
+X=(y-1)(y+1)^{-1}
+$$
+
+ is integral and skew-adjoint. The inverse relation $y=(1+X)(1-X)^{-1}$ shows that on the integral model, special fiber, and generic fiber, the group centralizer of $y$ equals the Lie centralizer of $X$. The element $\bar X$ is regular. The zero Lie element of $SO_2$ is also regular, because this group is a torus. This step does not mistake the regular even orthogonal unipotent partition $(2a-1,1)$ for a cyclic matrix.
+
+We now give the integral consequence of the finite-dimensional Kostant input in detail. For split $H=SO_d$, the coordinates of the Lie quotient $\chi:\mathfrak h\to\mathfrak c$ in odd dimension are the independent even-degree characteristic coefficients. In even dimension they are the coefficients of degrees $2,4,\ldots,2a-2$, together with the degree-$a$ Pfaffian. The last characteristic coefficient in even dimension is the square of the Pfaffian, so the characteristic polynomial cannot replace the full set of quotient coordinates. All these coordinates are explicit polynomials over $R$.
+
+The standard finite-dimensional regular-quotient theorem states that, on the allowed geometric fibers, $\chi$ is smooth on the regular locus, every geometric regular fiber is a single $H$-orbit, and the regular Lie centralizer is smooth of dimension $\operatorname{rk}H$. The locus where the Jacobian of the full quotient polynomials has full rank is precisely the regular locus on both geometric fibers. If an element has regular reduction, the relevant full-rank minor is a unit. Thus $\chi$ is smooth on its integral model at that element.
+
+Consider the action map 
+
+$$
+\begin{aligned}
+ H\times\mathfrak h_{\mathrm{reg}}
+ &\longrightarrow
+ \mathfrak h_{\mathrm{reg}}
+       \times_{\mathfrak c}\mathfrak h_{\mathrm{reg}},\\
+ (g,X)&\longmapsto(\operatorname{Ad}(g)X,X).
+\end{aligned}
+$$
+
+ At a geometric regular point, $\ker d\chi_X=[\mathfrak h,X]$, so its differential $(U,V)\mapsto([U,X]+V,V)$ is surjective. The source and target are both smooth over $R$; hence this action map is smooth. The single-orbit property also ensures that it is surjective on every geometric fiber. Therefore the transporter between two integral regular Lie elements with the same full quotient invariants is a smooth $R$-scheme whose special fiber has a $k$-point. Completeness and smooth Hensel lifting give an $R$-point. Pulling back the same map along $(X,X)$ also shows that the integral regular Lie centralizer is smooth.
+
+To compare the $\pm1$ clusters of the two self-dual lattices, first fix a volume form in their common generic quadratic space that is compatible with the standard split discriminant. It is a generator of the integral determinant lattice for each self-dual lattice: the norm of the volume is a unit, so its valuation is zero. Choose integral split isometric coordinates respecting this common orientation, adjusting by an integral reflection of determinant minus one if necessary. The two generic Cayley matrices are conjugate by an $SO$-isometry, so their full quotient invariants coincide in $E$, including the Pfaffian in even dimension. Since both sets of invariants lie in $R$, they also coincide in $R$. The smooth transporter above gives an integral $SO$-conjugating map. Viewed back in the common space, this map commutes with $x$.
+
+This conjugating map belongs to the generic identity-component centralizer. Indeed, for a regular semisimple Lie element, the centralizers on its nonzero reciprocal spectral pairs are $GL$ tori; its zero spectral cluster has dimension at most two, and the corresponding $SO$-centralizer is trivial or a torus. Hence the generic Lie centralizer is connected. Use this integral Lie centralizer model as the stabilizer model on each $\pm1$ cluster. The product of all the cluster models is $J$; its generic fiber is exactly $T=Z_{SO(V)}(x)^\circ$, and $J(R)$ consists exactly of the elements of $T(E)$ preserving $L$.
+
+The identity component of the finite group centralizer has determinant one on each $\pm1$ cluster, and acts by inverse transposes on the other pairs of spectral clusters. It is therefore contained in $J_k$. Smoothness gives 
+
+$$
+J(R)\twoheadrightarrow J(k)
+       \supset Z_{SO(L/\varpi L)}(\bar x)^\circ(k).
+$$
+
+ The spectral-cluster idempotents, Cayley operators, and centralizer models are all defined intrinsically from $x,B,L$. A semilinear automorphism can at most permute these factors, so the construction is equivariant. The product of the conjugating maps on all the clusters proves the asserted transitivity on lattices.
+
+$\square$
+
+Lemma 5.1 immediately handles all hyperspecial types in the ordinary class. For a $t$-modular lattice, first rescale the quadratic form as in Subsection 5.2. No affine Springer transitivity theorem for ramified groups is invoked here.
+
+### 5.4. The quadratic self-dual lift of the vector class and ordinary regularity
+
+Let $\gamma$ be a regular semisimple element in the nontrivial stabilizer coset at an endpoint listed in Subsection 5.2. Put 
+
+$$
+F=L(\pi),\qquad \pi^2=t,\qquad \sigma(\pi)=-\pi.
+$$
+
+ For any corresponding regular lattice, define the intrinsic lift 
+
+$$
+\widetilde\Lambda
+ =\Lambda_{\mathcal O_F}+\pi\Lambda^*_{\mathcal O_F}
+ =U_{\mathcal O_F}\perp\pi^{-1}W_{\mathcal O_F}.
+$$
+
+ It is self-dual and $\sigma$-stable. Moreover, $\mathcal O_F\cap L=\mathcal O$ and $\pi^{-1}\mathcal O_F\cap L=\mathcal O$, so $\widetilde\Lambda^\sigma=\Lambda$. The residual descent operator $S$ acts by $+1$ on $\bar U$ and by $-1$ on $\overline{\pi^{-1}W}$. Since $\dim W$ is even, $S\in SO_N(k)$.
+
+If $\gamma$ preserves $\Lambda$, it also preserves $\Lambda^*$. In a basis adapted to $U,W$, its block from $W$ to $U$ is divisible by $t$; after passing to the basis $U,\pi^{-1}W$, both off-diagonal blocks are divisible by $\pi$. Thus the residual element $\Gamma=\bar\gamma$ is the direct sum of the two original finite orthogonal actions, and commutes with $S$.
+
+We explain why a regular parahoric coset gives an ordinarily regular element $\Gamma\in SO_N(k)$. For an element of determinant minus one in $O_{2a}$, its semisimple $+1$ and $-1$ eigenspaces both have odd dimension. Its identity-component semisimple centralizer is the product of the two odd orthogonal factors and some $GL$ factors, and has rank $a-1$. The centralizer has its minimum dimension precisely when the unipotent part is regular in every factor. Thus the two distinguished spectral clusters have single odd blocks $(p)$ and $(q)$, while the $GL$ blocks on all other reciprocal spectral pairs are cyclic. For $a=1$, an element of determinant minus one is simply a reflection.
+
+For odd-dimensional $SO_{2r+1}$, the small factor is a line on which $\gamma$ acts by $-1$. Adding this line changes the negative cluster from $(q)$ to $(q,1)$, the regular unipotent partition for an even orthogonal group; the positive cluster remains a regular odd orthogonal block. In even dimension the small factor is a reflection plane, adding one line to each of the positive and negative clusters and giving $(p,1)$ and $(q,1)$. The other $GL$ blocks remain cyclic. Hence $\Gamma$ is ordinarily regular in both cases. When $p=q=1$, the resulting $SO_2$ factors are tori, whose identity unipotent elements are regular. This includes the boundary cases $SO_3$, $SO_4$, and $SO_6$.
+
+### 5.5. Correcting nondegenerate lines within the finite identity centralizer
+
+**Lemma 5.2 (Invariant-line transitivity).**
+
+If $u\in SO_{2a}(k)$ is regular unipotent, then $Z_{SO_{2a}}(u)^\circ(k)$ acts transitively on the $u$-invariant nondegenerate lines.
+
+**Proof.**
+
+If $a=1$, then $SO_2$ is a split torus. In a hyperbolic plane, both coordinates of a nondegenerate line are nonzero. The torus action and the existence of square roots in $k$ give the required transitivity.
+
+For $a>1$, the regular partition is $(2a-1,1)$. Decompose the space orthogonally into a nondegenerate odd block and a trivial nondegenerate line $ke$, normalized by $(e,e)=1$. The fixed vector $v$ of the odd block is isotropic, so the invariant nondegenerate lines are precisely $k(e+cv)$. Put $X=(u-1)(u+1)^{-1}$; then $Xe=Xv=0$. Define 
+
+$$
+Y(z)=(e,z)v-(v,z)e,\qquad
+ T_c=1+cY+\frac{c^2}{2}Y^2.
+$$
+
+ The operator $Y$ is skew-adjoint. The relations $Xe=Xv=0$ give $[X,Y]=0$, and $Y^3=0$. Direct multiplication gives $T_c^*T_c=1$ and $T_cT_d=T_{c+d}$. These elements form a one-parameter unipotent group, so they have determinant one and lie in the identity-component centralizer. Moreover, $T_ce=e+cv$. This proves transitivity on the listed lines.
+
+$\square$
+
+Now let $\Gamma$ be the ordinarily regular element obtained in Subsection 5.4. In odd dimension, the $+1$ space of the descent involution is the distinguished nondegenerate line on which $\Gamma=-1$; its remaining space has negative sign. Apply Lemma 5.2 within this even orthogonal negative cluster. In even dimension, the distinguished plane of the descent involution carries a reflection for $\Gamma$. It is therefore the orthogonal sum of one nondegenerate line with $\Gamma=+1$ and another with $\Gamma=-1$. Apply Lemma 5.2 separately in these two even orthogonal spectral clusters. No correction is needed on the other reciprocal spectral clusters.
+
+Consequently, any two involutions $S,S'$ that commute with the fixed $\Gamma$, have the same endpoint type, and have the precise distinguished line or plane described above are conjugate under $Z_{SO_N}(\Gamma)^\circ(k)$. This assertion specifies the action of $\Gamma$ on the distinguished spaces; it cannot be deduced solely from the dimensions of the involution eigenspaces.
+
+### 5.6. Full residual correction, congruence averaging, and flag decorations
+
+Take two regular lattices $\Lambda_1,\Lambda_2$ of the same endpoint type. By Subsection 5.4, their self-dual lifts both have ordinarily regular reductions. Lemma 5.1, applied over $\mathcal O_F$, gives 
+
+$$
+h\in T(F),\qquad
+ h\widetilde\Lambda_1=\widetilde\Lambda_2.
+$$
+
+ Put $a=h^{-1}\sigma(h)$. It stabilizes $\widetilde\Lambda_1$, hence belongs to $J(\mathcal O_F)$ from Lemma 5.1, and satisfies $a\sigma(a)=1$. The model $J$ is $\sigma$-stable: the integral characteristic polynomial of $\gamma$ is defined over $L$, and therefore belongs to $\mathcal O[X]$; its Hensel spectral clusters and idempotents are uniquely defined over $\mathcal O$. The Cayley transforms, duality forms, oriented $SO$ factors, and centralizer models are all intrinsic.
+
+Transport the descent operator of the target lattice to the first lifted lattice. Its residual operator is 
+
+$$
+S'=\bar a S.
+$$
+
+ It commutes with $\Gamma$, and its distinguished line or plane has the same dimension and the same $\Gamma$-action as that of $S$. By Subsection 5.5, choose $\bar b\in Z_{SO_N}(\Gamma)^\circ(k)$ such that 
+
+$$
+\bar b^{-1}S'\bar b=S,\qquad
+ \bar b^{-1}\bar a\,\sigma(\bar b)=1.
+$$
+
+ Lemma 5.1 ensures that this full finite identity-component centralizer is contained in $J_k$. Smoothness therefore lifts $\bar b$ to $b\in J(\mathcal O_F)$. Replace $h$ by $hb$; its descent discrepancy is then trivial modulo $\pi$. Here we have neither identified the entire finite centralizer with a connected group nor assumed that its $H^1$ is trivial.
+
+The remaining discrepancy lies in the congruence kernel. If it is trivial modulo $\pi^i$, its image $A$ in 
+
+$$
+J^i/J^{i+1}
+ \simeq\operatorname{Lie}(J_k)\otimes_k
+             \pi^i\mathcal O_F/\pi^{i+1}\mathcal O_F
+$$
+
+ satisfies $A+\sigma(A)=0$. Take a correction whose image is $A/2$. The image of the new discrepancy is 
+
+$$
+A-A/2+\sigma(A/2)=0.
+$$
+
+ Smoothness allows these corrections to be lifted successively, and completeness gives their $\pi$-adic limit. The resulting element $h_0\in T(L)$ is fixed by $\sigma$ and still takes $\widetilde\Lambda_1$ to $\widetilde\Lambda_2$. Taking fixed lattices gives $h_0\Lambda_1=\Lambda_2$.
+
+Finally, consider the two connected-parahoric flag decorations on each lattice. If the decoration transported by $h_0$ is incorrect, multiply on the left by $\gamma$ at the target. Since $\gamma$ belongs to the nontrivial coset of the full lattice stabilizer, it exchanges exactly these two decorations. Moreover, $\gamma$ is semisimple and belongs to an $L$-maximal torus containing it; this torus is $T=Z_{SO_N}(\gamma)^\circ$. Thus the final correction still lies in $T(L)$. It follows that the regular part of the partial fiber at every very special endpoint of the vector class is transitive under the identity-component centralizer.
+
+### 5.7. Conclusion for the actual special orthogonal groups
+
+The ordinary class is handled by Lemma 5.1 and $t$-modular rescaling; the nonzero vector class is handled by Subsections 5.4–5.6. The comparisons valid in all ranks in Subsection 5.2, together with the separate calculations for $B_1,D_2,D_3$, ensure that no endpoint has been omitted. The group $SO_1$ is trivial and $SO_2$ is a torus. Combined with the actual $\prod GL\times SO$ Newton Levi decomposition of Subsection 5.1, these results give the local transitivity required by every actual top-dimensional reduction path.
+
+To explain the passage from points to components, choose in each top-dimensional component a point that does not belong to any other top-dimensional component. The locally finite type property, with the corresponding perfection in mixed characteristic, guarantees the existence of such an open subset. Transitivity on points then implies transitivity on top-dimensional components. He’s local component correspondence consequently gives $n_{p,\gamma}=1$ for every path, and hence 
+
+$$
+\begin{aligned}
+ \#\bigl(Z_{SO_N}(\gamma)(L)\backslash
+              \Sigma^{\mathrm{top}}Y_\mu(\gamma)\bigr)
+ &=\sum_{p\in\mathcal R}1\\
+ &=|\mathcal R|\\
+ &=\dim V_\mu(\lambda_b).
+\end{aligned}
+$$
+
+ This proves the assertion at all Newton points for the actual split group $SO_N$. This section does not infer the result for its finite central quotients merely from the result for $SO_N$: the nonlifting spinor classes of those groups require a separate proof.
+
+<a id="chapter-6"></a>
+
+## 6. The Half-Spin Finite Lemma in Even Rank D
+
+This section proves the residue-field statement needed for descent in even rank of type $D$. Throughout, an actual $\operatorname{Spin}$-conjugacy class is fixed. A conjugacy class in the vector representation cannot replace this condition.
+
+### 6.1. Statement and notation
+
+Let $k$ be an algebraically closed field, let $n=2m\geq 4$, and assume 
+
+$$
+\operatorname{char}k=0
+\quad\text{or}\quad
+p\nmid |W(D_n)|=2^{n-1}n!.
+$$
+
+ Put 
+
+$$
+S=\operatorname{Spin}_{2n},
+\qquad
+\rho:S\longrightarrow\operatorname{SO}_{2n},
+$$
+
+ where $\rho$ is the vector representation, and denote the nonidentity element of $\ker\rho$ by $-1$. Choose $z\in Z(S)$ such that 
+
+$$
+z^2=1,\qquad \rho(z)=-I.
+$$
+
+ There are exactly two such elements $z$, corresponding to the two half-spin quotients. Let $s\in S(k)$ satisfy 
+
+$$
+\rho(s)^2=-I,\qquad s^2=z.
+$$
+
+ Fix the actual $S(k)$-conjugacy class of $s$.
+
+**Proposition 6.1.**
+
+Suppose that $x\in S(k)$ satisfies 
+
+$$
+sxs^{-1}=zx,
+\qquad
+\dim Z_S(s,x)=m.
+$$
+
+ Then:
+
+1.  $x$ is regular in $S$, that is, $\dim Z_S(x)=n$.
+
+2.  If $s'$ is $S(k)$-conjugate to $s$ and satisfies $s'xs'^{-1}=zx$, then there is a $c\in Z_S(x)(k)$ such that $s'=csc^{-1}$. The full centralizer is used here, retaining all of its connected components.
+
+The proof proceeds through the spectral decomposition, the Weyl-group action, and the cohomology of the full centralizer.
+
+### 6.2. Ordinary regularity for every residual spectral type
+
+**Proof of Proposition 6.1, part (1).**
+
+Choose $i\in k$ with $i^2=-1$. Since $\rho(s)^2=-I$, the vector space $V$ decomposes as 
+
+$$
+V=V_i\oplus V_{-i},
+\qquad
+\dim V_i=\dim V_{-i}=n.
+$$
+
+ Both subspaces are totally isotropic and are perfectly paired by the quadratic form. In corresponding dual bases, the matrix of the form and the matrix of $\rho(x)$ are 
+
+$$
+J=\begin{pmatrix}0&I\\ I&0\end{pmatrix},
+\qquad
+\rho(x)=\begin{pmatrix}0&A\\ A^{-T}&0\end{pmatrix},
+\qquad
+A\in\operatorname{GL}_n(k).
+$$
+
+ The latter expression follows from $\rho(s)\rho(x)=-\rho(x)\rho(s)$ and preservation of the form. Because $n$ is even, this matrix has determinant one.
+
+The centralizer of $s$ in the vector group is $\operatorname{GL}(V_i)$. Its element $\operatorname{diag}(P,P^{-T})$ acts on $A$ by $A\mapsto PAP^T$. Hence the dimension of the common centralizer is the dimension of the isometry group of the nondegenerate bilinear form $A^{-1}$. The central Spin covering does not change these dimensions.
+
+Write the Jordan decomposition as $x=x_sx_u$. Since $z$ is central and semisimple, 
+
+$$
+sx_ss^{-1}=zx_s,\qquad sx_us^{-1}=x_u.
+$$
+
+ Apply the matrix description above to $x_s$. The asymmetry operator of the bilinear form is 
+
+$$
+D=AA^{-T}.
+$$
+
+ It is also the action of $\rho(x_s)^2$ on $V_i$, and therefore is semisimple. The bilinear form pairs the $\lambda$-eigenspace of $D$ with its $\lambda^{-1}$-eigenspace. On the $+1$-eigenspace it is symmetric; on the $-1$-eigenspace it is alternating.
+
+Write $a,b$ for the dimensions of these two spaces and $r_\lambda$ for the dimension of each member of each remaining pair $\{\lambda,\lambda^{-1}\}$, where $\lambda\neq\pm1$. Up to central separable isogeny, the identity component of the common centralizer of the semisimple pair $(s,x_s)$ has factors 
+
+$$
+\operatorname{SO}_a\times\operatorname{Sp}_b
+\times
+\prod_{\{\lambda,\lambda^{-1}\}}
+\operatorname{GL}_{r_\lambda},
+\qquad
+a+b+2\sum r_\lambda=n.
+$$
+
+ Here $b$ is even, and hence $a$ is even as well. The isometry group of the symmetric form may have additional components, but its unipotent elements belong to $\operatorname{SO}_a$. The sum of the ranks of these factors is exactly 
+
+$$
+\frac a2+\frac b2+\sum r_\lambda=m.
+$$
+
+ In each factor the dimension of the centralizer of a unipotent element is at least the rank of that factor. Thus the assumption $\dim Z_S(s,x)=m$ forces $x_u$ to be regular in every factor.
+
+Now consider the ordinary semisimple centralizer $H=Z_S(x_s)$. By the spectral decomposition of $x_s^2$ above, its factors in the vector representation are 
+
+$$
+\operatorname{SO}_a\times\operatorname{SO}_a
+\times\operatorname{GL}_b
+\times
+\prod_{\{\lambda,\lambda^{-1}\}}
+\bigl(
+\operatorname{GL}_{r_\lambda}
+\times\operatorname{GL}_{r_\lambda}
+\bigr).
+$$
+
+ More explicitly, $D=1$ gives the $+1$ and $-1$ orthogonal eigenspaces of $x_s$, while $D=-1$ gives the mutually dual $i$ and $-i$ eigenspaces. Every remaining pair of eigenvalues of the asymmetry operator gives four eigenvalues, and consequently two general linear factors. In these ordinary factors the Jordan partitions of $x_u$ are, respectively, 
+
+$$
+(a-1,1),\ (a-1,1);
+\qquad
+(b);
+\qquad
+(r_\lambda),\ (r_\lambda).
+$$
+
+ These are precisely the regular unipotent partitions in the corresponding factors. If $a=0$, the corresponding factors are absent. If $a=2$, the partition is $(1,1)$, the identity in the torus $\operatorname{SO}_2$, and it remains regular. Thus all degenerate or absent spectral sectors are included.
+
+It follows that $x_u$ is regular in $H$, and 
+
+$$
+\dim Z_S(x)=\operatorname{rk}H
+=a+b+2\sum r_\lambda=n.
+$$
+
+ This proves the first assertion. In particular, the two-block partition $(a-1,1)$ in an even-dimensional orthogonal sector is retained throughout. The proof does not assume that the matrix in the vector representation is cyclic.
+
+$\square$
+
+### 6.3. A stable Borel subgroup, a stable torus, and a pinning
+
+Since $S$ is simply connected and semisimple, the centralizer $H=Z_S(x_s)$ of the semisimple element is connected. The preceding subsection proved that $x_u$ is regular in $H$, so the Borel subgroup $B_H$ of $H$ containing $x_u$ is unique.
+
+The automorphism $\theta=\operatorname{Ad}(s)$ preserves $H$ and fixes $x_u$; hence it preserves $B_H$. Moreover, $s^2=z$ is central, so $\theta^2=1$. Since two is invertible, tame first cohomology vanishes for the unipotent groups governing the torsor of maximal tori in the Borel. Consequently $B_H$ contains a $\theta$-stable maximal torus $T$. Since a semisimple centralizer has the same rank as $S$, this is also a maximal torus of $S$. The central element $x_s$ belongs to $T$.
+
+Let $U_H$ be the unipotent radical of $B_H$. Regularity means that every simple-root coordinate of $x_u$ in 
+
+$$
+U_H/[U_H,U_H]
+=\prod_{\alpha\in\Delta_H}U_\alpha
+$$
+
+ is nonzero. Since $\theta$ fixes $x_u$, these coordinates can be used to normalize the simple-root parameters so that $\theta$ permutes them without scalar factors. Thus the action of $\theta$ on $H$ preserves a pinning, with permutations of isomorphic simple factors allowed. Torus factors have no simple roots and introduce no exception.
+
+This step uses the ordinary regularity already proved. No folding argument is used to assume regularity in the opposite direction.
+
+### 6.4. The Weyl action and the conjugacy class selected by the exact square
+
+Denote the vector weights of $T$ by $\pm e_1,\ldots,\pm e_n$. The cocharacter lattice of Spin is 
+
+$$
+Q=
+\left\{
+(a_1,\ldots,a_n)\in\mathbb Z^n:
+\sum a_j\text{ is even}
+\right\}.
+$$
+
+ Let $w\in W(D_n)$ be the action of $s$ on $T$. Since $s^2\in Z(S)$, one has $w^2=1$.
+
+A positive one-cycle is impossible. If $w(e_j)=e_j$, then $w(x_s)=zx_s$ and $e_j(z)=-1$ imply 
+
+$$
+e_j(x_s)=-e_j(x_s),
+$$
+
+ contradicting the nonzero eigenvalue and the invertibility of two. A negative one-cycle is also impossible: on the corresponding hyperbolic plane, an isometry interchanging the two isotropic lines has matrix 
+
+$$
+\begin{pmatrix}0&c\\ c^{-1}&0\end{pmatrix},
+$$
+
+ whose square is $I$, contrary to $\rho(s)^2=-I$. Thus $w$ is a product of $m$ signed two-cycles, each with sign product $+1$.
+
+For a pair of coordinates $(p,q)$, choose $\epsilon=\pm1$ and put 
+
+$$
+\eta=e_p+\epsilon e_q,
+\qquad
+\beta=e_p-\epsilon e_q.
+$$
+
+ The root reflection $s_\eta$ gives the signed interchange on this pair. Its standard root-$\operatorname{SL}_2$ representative $n_\eta$ satisfies 
+
+$$
+n_\eta^2=\eta(-1).
+$$
+
+ Taking the product over the disjoint coordinate pairs gives a representative $n_w$ of $w$. The root subgroups for distinct pairs commute. Changing the sign of one pair changes the corresponding factor in $n_w^2$ by 
+
+$$
+(2e_q)(-1)=-1\in\ker\rho.
+$$
+
+ Therefore the two $W(D_n)$-conjugacy classes of these signed two-cycle products are distinguished by the parity of the number of negative pairs. The squares of their standard representatives are $z$ and $-z$, respectively.
+
+It remains to rule out a torus correction changing this square. Write $s=t n_w$. Then 
+
+$$
+s^2=t\,w(t)\,n_w^2.
+$$
+
+ The image of the norm map $t\mapsto t w(t)$ is the connected fixed torus $(T^w)^0$. Its cocharacter lattice has basis 
+
+$$
+\beta_j=e_{p_j}-\epsilon_j e_{q_j},
+\qquad
+1\leq j\leq m.
+$$
+
+ These vectors span a saturated sublattice of $\mathbb Z^n$. Consequently the map from this torus to the vector torus is a closed embedding. In particular, it does not contain the nontrivial kernel element $-1$ of the Spin covering. Since the vector images of $s^2$ and $n_w^2$ are both $-I$, a nonidentity norm correction would have to be precisely that kernel element. The correction is therefore the identity. The exact equality $s^2=z$ selects one of the two Weyl conjugacy classes above.
+
+The outer automorphism exchanging the two spin nodes also exchanges the two possible elements $z$. It is therefore enough first to prove the reference case 
+
+$$
+w(e_j)=-e_{n+1-j}
+\qquad
+(1\leq j\leq n),
+$$
+
+ in which every coordinate pair is interchanged with negative signs. The other half-spin central element is obtained by the outer automorphism.
+
+### 6.5. The unique nontrivial torus cohomology class
+
+In the reference case, put 
+
+$$
+\begin{aligned}
+\beta_j&=e_j-e_{n+1-j},\\
+\delta_j&=e_j+e_{n+1-j}
+\qquad (1\leq j\leq m),\\
+s_0&=\prod_{j=1}^m n_{\delta_j}.
+\end{aligned}
+$$
+
+ Then $s_0^2=z$. A direct calculation gives 
+
+$$
+Q^w=\bigoplus_{j=1}^m\mathbb Z\beta_j.
+$$
+
+ For $a=(a_1,\ldots,a_n)\in Q$, 
+
+$$
+(1+w)a=
+\sum_{j=1}^m(a_j-a_{n+1-j})\beta_j.
+$$
+
+ The sum of these coefficients has the same parity as $\sum a_j$. Thus 
+
+$$
+(1+w)Q=
+\left\{
+\sum b_j\beta_j:\sum b_j\text{ is even}
+\right\}.
+$$
+
+ Conversely, if $\sum b_j$ is even, choosing $a_j=b_j$ and $a_{n+1-j}=0$ realizes the required norm, so no values are omitted.
+
+For a torus over an algebraically closed field with a cyclic action of order two invertible in the field, the lattice calculation of cyclic cohomology gives 
+
+$$
+H^1(C_2,T(k))
+\simeq Q^w/(1+w)Q
+\simeq\mathbb Z/2.
+$$
+
+ Here we use the usual Tate correspondence between the lattice and the group of torus points. After choosing the root of unity $-1$, the nonzero class is represented by 
+
+$$
+b=\beta_1(-1).
+$$
+
+ Indeed, $w(\beta_1)=\beta_1$, so $b\,w(b)=1$, and $\beta_1$ is nonzero in the quotient lattice above.
+
+The effect of this class on the actual Spin conjugacy class can be determined explicitly. In the $\operatorname{Spin}_4$ corresponding to the first coordinate pair, $\beta_1,\delta_1$ are orthogonal roots, and 
+
+$$
+\beta_1(-1)\delta_1(-1)=-1.
+$$
+
+ The root-$\operatorname{SL}_2$ relation also gives 
+
+$$
+\delta_1(i)n_{\delta_1}\delta_1(i)^{-1}
+=\delta_1(-1)n_{\delta_1}.
+$$
+
+ The root representatives for the other pairs commute with $\delta_1(i)$. Hence 
+
+$$
+\delta_1(i)s_0\delta_1(i)^{-1}
+=\delta_1(-1)s_0
+=-\beta_1(-1)s_0.
+$$
+
+ Equivalently, $\beta_1(-1)s_0$ is conjugate in $S$ to $-s_0$.
+
+### 6.6. Half-spin characters exclude the nonzero class
+
+Let $\chi_+,\chi_-$ be the characters of the two half-spin representations. Each root representative $n_{\delta_j}$ is conjugate to $\delta_j(i)$, and these conjugations can be performed simultaneously. Thus the characters of $s_0$ can be computed on the standard torus.
+
+Choose $r\in k$ with $r^2=i$. The half-spin weights are $\frac12(\pm e_1\pm\cdots\pm e_n)$, divided into two sets by the parity of the number of minus signs. Therefore 
+
+$$
+\chi_\pm(s_0)=
+\frac{(r+r^{-1})^{2m}\pm(r-r^{-1})^{2m}}2.
+$$
+
+ Since 
+
+$$
+(r+r^{-1})^2=2,\qquad
+(r-r^{-1})^2=-2,
+$$
+
+ the unordered pair of character values is 
+
+$$
+\{\chi_+(s_0),\chi_-(s_0)\}=\{0,2^m\}.
+$$
+
+ The kernel element $-1$ acts as minus the identity in both half-spin representations. Consequently 
+
+$$
+\{\chi_+(-s_0),\chi_-(-s_0)\}=\{0,-2^m\}.
+$$
+
+ Two is invertible in the allowed characteristics, so these unordered pairs differ. This proves that $s_0$ and $-s_0$ do not belong to the same Spin conjugacy class.
+
+Return now to the actual $s$ in the stable torus. After bringing its Weyl action to the reference $w$, write $s=t_0s_0$. The exact square relation gives 
+
+$$
+t_0w(t_0)=1.
+$$
+
+ The two cohomology classes computed in the preceding subsection show that, after conjugation by the torus, $s$ is $s_0$ or $\beta_1(-1)s_0$; the latter is conjugate to $-s_0$. Choose as reference the member of $\{s_0,-s_0\}$ belonging to the actual fixed conjugacy class. The unique nonzero torus class then always sends this reference element to the other Spin conjugacy class.
+
+Thus the condition needed to exclude the nonzero class is that the actual Spin conjugacy class is fixed. Fixing the vector spectrum, or a conjugacy class in the adjoint group, does not suffice.
+
+### 6.7. The full regular centralizer and uniqueness of conjugacy
+
+**Proof of Proposition 6.1, part (2).**
+
+Put 
+
+$$
+C=Z_S(x)=Z_H(x_u).
+$$
+
+ In the characteristic range under consideration, the standard structure of a regular unipotent centralizer gives 
+
+$$
+C=Z(H)\times U,
+$$
+
+ where $U$ is a connected unipotent group. Here $Z(H)$ must be the full center of multiplicative type, not merely $Z(H)^0$. Both factors are $\theta$-stable.
+
+The unipotent group admits a $\theta$-stable filtration with successive quotients additive groups. On each quotient, cohomology for the order-two action vanishes by averaging with $\frac12$. Successive lifting therefore gives 
+
+$$
+H^1(C_2,U(k))=1.
+$$
+
+ Thus every first cohomology class of $C$ can be represented by a cocycle in $Z(H)$.
+
+On the other hand, the character lattice of 
+
+$$
+D_H=T/Z(H)
+$$
+
+ is the root lattice of $H$, with its simple roots as a basis. The pinning constructed in Subsection 6.3 makes $\theta$ permute this basis. Hence $D_H^\theta$ is a connected torus: in the corresponding permutation coordinates, the fixed points simply require equality of the coordinates on each orbit.
+
+The map 
+
+$$
+T^\theta\longrightarrow D_H^\theta
+$$
+
+ is surjective on $k$-points. Indeed, the characteristic assumptions of this section make the relevant centers smooth; the prime divisors of their finite orders all occur in $n!$. After passage to Lie algebras, taking invariants under an order-two action is exact, so the differential of this map is surjective. The fixed-point groups themselves are smooth because the action order is invertible. The image is therefore an open subgroup of the connected target torus, and consequently is the entire torus.
+
+The fixed-point and cohomology exact sequence associated with $1\to Z(H)\to T\to D_H\to1$ now yields an injection 
+
+$$
+H^1(C_2,Z(H)(k))
+\hookrightarrow H^1(C_2,T(k)).
+$$
+
+ Combined with the vanishing of the unipotent part, this embeds $H^1(C_2,C(k))$ into the two torus classes already computed in this section. The map means: first conjugate a cocycle into the full center $Z(H)$, then use $Z(H)\subset T$. It does not treat the entire centralizer $C$ as a subgroup of the torus.
+
+Now take $s'$ as in the proposition and put $a=s's^{-1}$. The two almost-commutation relations imply $a\in C(k)$. Since $s'^2=s^2=z$, one also has 
+
+$$
+a\,\theta(a)=1.
+$$
+
+ Thus $a$ is a first cocycle for the action of $C_2$ on $C(k)$. Reduce it by a $C(k)$-coboundary to the full center, then map it into torus cohomology. If the resulting torus class were nonzero, Subsection 6.6 would imply that $as=s'$ is conjugate to $-s$, contradicting the assumption that $s'$ is conjugate to the actual $s$. The class is therefore zero. The injection above then shows that its $C$-cohomology class is also zero. There is a $c\in C(k)$ such that 
+
+$$
+a=c\,\theta(c)^{-1},
+\qquad
+s'=csc^{-1}.
+$$
+
+ This proves the second assertion.
+
+$\square$
+
+### 6.8. Matching the two actual half-spin endpoints
+
+To connect with the geometric normalization in Section 8, record the actual elements associated with the two maximal endpoints for the same half-spin action. The first endpoint deletes the affine vertices $\{0,n\}$, and its parameter is 
+
+$$
+q=\omega_n=\frac12(1,\ldots,1),
+\qquad
+s=(2q)(i).
+$$
+
+ Then $\rho(s)^2=-I$ and $s^2=z$. The second endpoint deletes $\{1,n-1\}$, with parameter 
+
+$$
+q'=\frac12(3,1,\ldots,1,-1),
+\qquad
+s_2=(2q')(i)=(e_1-e_n)(-1)s.
+$$
+
+ It has the same exact square $z$ and the same vector spectrum, but is conjugate to $-s$, rather than to $s$. Explicitly, let $v$ be the even-sign Weyl element that changes the signs of the first and the $n$-th coordinates simultaneously. Then 
+
+$$
+v(s)=(e_1+e_n)(-1)s,
+\qquad
+(e_1-e_n)(-1)(e_1+e_n)(-1)=-1,
+$$
+
+ so $s_2=-v(s)$.
+
+When Proposition 6.1 is applied at these two endpoints, the actual Spin conjugacy class of $s$ and that of $s_2$ must therefore be fixed separately. These two classes are exactly interchanged in the half-spin character calculation above, and the proof applies to both. The outer automorphism exchanging the two spin nodes carries the entire argument to the other central element $z$. This includes both half-spin quotients and both actual endpoints for each quotient.
+
+This section proves the full finite-group lemma. Its application to affine Springer fibers still requires the integral models, smoothness of regular centralizers, and tame descent provided in Section 8.
+
+<a id="chapter-7"></a>
+
+## 7. The Primitive-Spinor Finite Lemma in Odd Rank D
+
+### 7.1. The statement and the actual fourth power
+
+Retain the field and characteristic assumptions of Section 1. Let $n=2m+1\geq 5$, put $S=\operatorname{Spin}_{2n}$, and let $\rho:S\to\operatorname{SO}(V)$ be the vector covering, with $\dim V=2n$. The center is $Z(S)\simeq\mu_4$. Let $z$ be either primitive generator, so that $\rho(z)=-I$. Write $-1$ for the nonidentity element in the kernel of the vector covering.
+
+Fix $s\in S(k)$ whose vector spectrum is 
+
+$$
+1^{2m},\qquad (-1)^{2m},\qquad i,\qquad -i,\qquad i^2=-1.
+$$
+
+ Its actual fourth power is $s^4=-1$, rather than $s^4=1$. We verify this fourth power explicitly below.
+
+**Lemma 7.1.**
+
+Suppose that $\Gamma\in S(k)$ satisfies 
+
+$$
+s\Gamma s^{-1}=z^r\Gamma,\qquad
+r\ \text{odd},\qquad
+\dim Z_S(s,\Gamma)=m-1.
+$$
+
+ Then $\Gamma$ is regular in $S$ in the ordinary, untwisted sense. If $s'$ belongs to the actual $S$-conjugacy class of $s$ and 
+
+$$
+s'\Gamma(s')^{-1}=z^r\Gamma,
+$$
+
+ then there is an element $b\in Z_S(\Gamma)(k)$ such that $s'=bsb^{-1}$. The centralizer here is the full centralizer, including its finite central components.
+
+### 7.2. Ordinary regularity for every spectral pattern
+
+**Proof of the first assertion of Lemma 7.1.**
+
+Put $A=\rho(\Gamma)$, and decompose the vector space according to $\rho(s)$: 
+
+$$
+V=V_+\perp V_-\perp(V_i\oplus V_{-i}).
+$$
+
+ The first two spaces are nondegenerate orthogonal spaces, both of dimension $2m$, while the last two lines are mutually paired isotropic lines. The relation in the vector representation is 
+
+$$
+\rho(s)A=-A\rho(s).
+$$
+
+ Thus $A$ exchanges $V_+$ and $V_-$, and also exchanges $V_i$ and $V_{-i}$.
+
+On the last hyperbolic plane, $A$ is a reflection and has determinant $-1$. Let the cycle product on the first two orthogonal spaces be 
+
+$$
+B=A^2|_{V_+}\in O(V_+).
+$$
+
+ For a block matrix exchanging two even-dimensional spaces, its determinant is the determinant of this cycle product. Since $\det A=1$, it follows that $\det B=-1$. Hence $B\in O_{2m}^{-}(k)$.
+
+An isometry on the first two spaces that commutes with both $\rho(s)$ and $A$ is uniquely determined by an isometry of $V_+$ commuting with $B$; the product of the determinants on the two spaces is one. The last hyperbolic plane contributes only a finite centralizer. The separable Spin covering does not change dimensions, so 
+
+$$
+\dim Z_S(s,\Gamma)=\dim Z_{O_{2m}}(B).
+$$
+
+Let $p$ and $q$ be the dimensions of the $+1$ and $-1$ eigenspaces of $B_s$, and let $d_a$ denote the dimension on one side of each of its other reciprocal eigenvalue pairs. Then 
+
+$$
+p+q+2\sum_a d_a=2m.
+$$
+
+ Because $\det B=-1$, the integer $q$ is odd. The total dimension is even, so $p$ is odd as well. In particular $p,q\geq 1$. The identity component of the semisimple centralizer is 
+
+$$
+SO_p\times SO_q\times\prod_a GL_{d_a},
+$$
+
+ and its rank is 
+
+$$
+\frac{p-1}{2}+\frac{q-1}{2}+\sum_a d_a=m-1.
+$$
+
+ The minimal dimension of the common centralizer forces $B_u$ to be regular unipotent in each factor. Its natural Jordan blocks are therefore 
+
+$$
+(p),\qquad (q),\qquad (d_a),
+$$
+
+ respectively.
+
+Now return to the block matrix $A$ that exchanges the two spaces. Taking square roots of the $+1$ block of the cycle product produces one block of size $p$ in each of the $+1$ and $-1$ eigenspaces of $A_s$. The reflection on the additional hyperbolic plane adds one trivial line to each. The Jordan partition in both spaces is therefore 
+
+$$
+(p,1),
+$$
+
+ the regular unipotent partition for $SO_{p+1}$. The $-1$ block of $B_s$ produces a cyclic $GL_q$ block on the reciprocally paired $i$ and $-i$ eigenspaces of $A_s$. Every other reciprocal pair produces two cyclic $GL_{d_a}$ blocks. Thus the identity factors of the ordinary semisimple centralizer are 
+
+$$
+SO_{p+1}\times SO_{p+1}\times GL_q
+\times\prod_a(GL_{d_a}\times GL_{d_a}),
+$$
+
+ and the unipotent part is regular in every factor. When $p=1$, the factor $SO_2$ is a torus, and the trivial unipotent element is regular in that torus. The case $q=1$ is included as well.
+
+Consequently $A$ is regular in the ordinary special orthogonal group. The separable central covering implies that $\Gamma$ is regular in $S$. This proves the first assertion without assuming that the residual element is semisimple.
+
+$\square$
+
+### 7.3. A stable pinning from the regular unipotent part
+
+Set $H=Z_S(\Gamma_s)$. A semisimple centralizer in a simply connected semisimple group is connected. By the preceding subsection, $\Gamma_u$ is regular unipotent in $H$. The relation with $\Gamma$ implies that $s$ stabilizes $H$ and fixes $\Gamma_u$.
+
+A regular unipotent element belongs to a unique Borel subgroup, so this Borel subgroup is stable under $s$. Its maximal tori form a torsor under its unipotent radical. Tame vanishing of $H^1(C_4,U)$ supplies a stable maximal torus $T$. The coordinate of $\Gamma_u$ in every simple-root direction is nonzero. Normalize the root parameters using these coordinates. Then $\operatorname{Ad}(s)$ permutes the simple-root parameters without scalar factors, giving a stable pinning. This argument also applies when $H$ has torus factors: such factors have no simple-root directions.
+
+### 7.4. One signed Weyl class for all semisimple sectors
+
+Put $r_0=(p+1)/2$. The element $s$ exchanges the two $SO_{2r_0}$ factors. Its square acts by $+1$ on the regular block of size $p$, and by $-1$ on the added trivial line. Consequently its square is the pinned outer orthogonal involution, which changes the sign of one torus coordinate. The action on the two sets of torus coordinates consists of one negative two-cycle and $r_0-1$ positive two-cycles. A negative two-cycle means a two-cycle whose product of signs is $-1$.
+
+When $r_0=1$, the reflection acts on the $SO_2$ torus by inversion, and the resulting action is still a single negative two-cycle. When $r_0=2$, the outer interchange of the two factors of $D_2=A_1^2$ has the same description.
+
+On the $GL_q$ factor, the transpose-inverse action induced by $s$ comes from a symmetric form, because $s^2=1$ on this sector. After choosing the stable pinning, the torus action is 
+
+$$
+e_j\longmapsto-e_{q+1-j}.
+$$
+
+ Since $q$ is odd, it consists of one negative one-cycle and $(q-1)/2$ positive two-cycles. Every exchanged pair of $GL_{d_a}$ factors contributes $d_a$ positive two-cycles. The total number of positive two-cycles is therefore 
+
+$$
+\frac{p-1}{2}+\frac{q-1}{2}+\sum_a d_a=m-1.
+$$
+
+Conjugating by signed coordinate changes puts each positive two-cycle into the form of an exchange with two minus signs. If the conjugating change uses an odd number of sign changes, make one more sign change on the coordinate of the negative one-cycle. This does not change the action, and it makes the total number of sign changes even. Thus the conjugacy takes place inside $W(D_n)$, rather than merely inside the larger signed symmetric group. We may take the standard form 
+
+$$
+\begin{aligned}
+w(e_1)&=-e_n,&\qquad w(e_n)&=e_1,\\
+w(e_j)&=-e_{n+1-j}&& (2\leq j\leq n-1).
+\end{aligned}
+$$
+
+ The first pair is a negative two-cycle, the middle coordinate is a negative one-cycle, and all remaining pairs are positive two-cycles.
+
+### 7.5. The actual fourth power of a reference lift
+
+Choose a vector Weyl representative on a hyperbolic basis, and denote one of its Spin lifts by $s_0$. A positive two-cycle has spectrum $1,1,-1,-1$, a negative one-cycle has spectrum $1,-1$, and a negative two-cycle has spectrum $1,-1,i,-i$. Its total spectrum is therefore exactly 
+
+$$
+1^{2m},\qquad (-1)^{2m},\qquad i,\qquad -i.
+$$
+
+ The vector element $\rho(s_0)$ is conjugate to $\rho(s)$ in $SO(V)$. Indeed, if an initial conjugating isometry has determinant $-1$, multiplying it by a reflection in a nonzero $+1$ or $-1$ eigenspace changes its determinant to $+1$.
+
+This vector element is conjugate to $q(i)$, where 
+
+$$
+q=2(e_1+\cdots+e_m)+e_{m+1}.
+$$
+
+ The vector $q$ is an $SO$ cocharacter, but its coordinate sum is odd, so it is not a Spin cocharacter. A Spin lift can be written as 
+
+$$
+(2q)(\zeta_8),\qquad \zeta_8^2=i.
+$$
+
+ Its fourth power is $(2q)(-1)=-1$. Thus the actual element satisfies $s^4=-1$, and every Spin lift of the chosen vector representative has the same fourth power. The two lifts differ by the vector kernel element $-1$, which does not change their fourth powers.
+
+After identifying the stable torus, write 
+
+$$
+s=a s_0,\qquad a\in T(k).
+$$
+
+ Equality of the actual fourth powers gives 
+
+$$
+a\,w(a)\,w^2(a)\,w^3(a)=1.
+$$
+
+ Thus $a$ is a genuine torus cocycle, rather than a solution to a fourth-power equation with an unremoved central twist.
+
+### 7.6. All cohomology classes for the order-four action
+
+The Spin cocharacter lattice is 
+
+$$
+Q(D_n)=
+\left\{v\in\mathbb Z^n:\ \sum_j v_j\ \text{is even}\right\}.
+$$
+
+ The invariant lattice for the standard $w$ has basis 
+
+$$
+\beta_j=e_j-e_{n+1-j},\qquad 2\leq j\leq m.
+$$
+
+ Let $N=1+w+w^2+w^3$. On a positive two-cycle, a norm coefficient is twice the coordinate difference. The coordinate of the negative one-cycle can change the parity of the total coordinate sum without changing the norm. The negative two-cycle also has zero norm. It follows that 
+
+$$
+NQ(D_n)=2Q(D_n)^w.
+$$
+
+ The tame cyclic torus cohomology formula gives 
+
+$$
+H^1(C_4,T(k))
+\simeq Q(D_n)^w/NQ(D_n)
+\simeq(\mathbb Z/2)^{m-1}.
+$$
+
+Actual point representatives for these classes are 
+
+$$
+c_J=\prod_{j\in J}\beta_j(i),
+\qquad J\subset\{2,\ldots,m\}.
+$$
+
+ Here $i$ cannot be replaced by $-1$: for an order-four action, the representative $\beta_j(-1)$ corresponds to twice the lattice class, which is already zero. Multiplication by $\beta_j(i)$ changes the square on the four-dimensional vector block associated to that positive two-cycle from $+1$ to $-1$. Hence 
+
+$$
+\dim\ker\bigl(\rho(c_Js_0)^2+I\bigr)=2+4|J|.
+$$
+
+ For the actual $s$, this dimension is two. Therefore no nonempty $J$ gives an element conjugate to $s$.
+
+First apply this exclusion to $a$. Its cohomology class is zero, so after $T$-conjugation we may arrange that the actual $s=s_0$. The exclusion consequently applies to the actual action $\operatorname{Ad}(s)$, and not just to a formal reference representative.
+
+### 7.7. Injecting cohomology of the full centralizer
+
+Since $\Gamma_u$ is regular in $H$, its full centralizer is 
+
+$$
+C_\Gamma=Z_S(\Gamma)=Z_H(\Gamma_u)=Z(H)\times U_C,
+$$
+
+ where $U_C$ is connected unipotent and $Z(H)$ includes all finite components. Both factors are stable under $s$. Tame vanishing for unipotent cohomology yields 
+
+$$
+H^1(C_4,C_\Gamma(k))
+\simeq H^1(C_4,Z(H)(k)).
+$$
+
+The character lattice of the torus $Q_T=T/Z(H)$ is the root lattice of $H$, and its simple-root basis is permuted by $s$. Thus $Q_T^s$ is connected: the coinvariants of a permutation lattice are torsion-free. Our characteristic assumptions exclude the relevant finite orders in the center, so $Z(H)$ is smooth. Taking invariants for an action of invertible order preserves exactness in 
+
+$$
+0\longrightarrow\operatorname{Lie}Z(H)
+\longrightarrow\operatorname{Lie}T
+\longrightarrow\operatorname{Lie}Q_T
+\longrightarrow0.
+$$
+
+ Consequently the map $T^s\to Q_T^s$ has surjective differential. Its image is a closed subgroup of full dimension in a connected target, and hence the map is surjective on $k$-points. The cohomology exact sequence gives an injection 
+
+$$
+H^1(C_4,C_\Gamma(k))
+\simeq H^1(C_4,Z(H)(k))
+\hookrightarrow H^1(C_4,T(k)).
+$$
+
+ This arrow does not embed the group $C_\Gamma$, with its unipotent factor, into a torus. It first removes the unipotent cohomology and then uses the inclusion of the full center into the torus.
+
+### 7.8. Full-centralizer conjugacy of competing inertia elements
+
+**Proof of the second assertion of Lemma 7.1.**
+
+Let $s'$ satisfy the second assertion of the lemma. Then 
+
+$$
+d=s's^{-1}\in C_\Gamma(k),
+$$
+
+ and 
+
+$$
+d\,\operatorname{Ad}(s)(d)\,
+\operatorname{Ad}(s)^2(d)\,
+\operatorname{Ad}(s)^3(d)=1.
+$$
+
+ The cocycle equation follows from $(s')^4=s^4=-1$.
+
+First conjugate $s'$ by an element of $U_C(k)$ to remove its unipotent cocycle component, and then map the remaining central cocycle to torus cohomology. Its class has a representative $c_J$. Further torus conjugation therefore makes the resulting inertia element equal to $c_Js$.
+
+If $J\ne\varnothing$, the dimension $2+4|J|$ determined by its square spectrum contradicts the dimension two for the actual conjugacy class. Thus its torus class is zero. By the injection above, its full-centralizer cohomology class is also zero. This is exactly the assertion that 
+
+$$
+s'=bsb^{-1},\qquad b\in C_\Gamma(k).
+$$
+
+ The second assertion is proved. The argument applies uniformly to every $m\geq2$, every allowed residual semisimple sector, and nonsemisimple regular reductions.
+
+$\square$
+
+<a id="chapter-8"></a>
+
+## 8. Uniform Tame Normalization and Integral Descent
+
+This section turns the finite almost-commuting lemmas in Sections 6, 7, and 9 into regular-point transitivity over the original field $L$. The actual simply connected inertia lift, the full residue centralizer, and every Kottwitz grade are retained.
+
+### 8.1. The cyclic central envelope and its parameters
+
+Let $S$ be split simply connected semisimple and let $C=\langle z\rangle\subset Z(S)$ be cyclic of order $e$. Choose $\iota:C\overset\sim\to\mu_e$, and put 
+
+$$
+H_C=(S\times\mathbb G_m)/
+\{(c,\iota(c)^{-1}):c\in C\},\qquad
+\chi([h,a])=a^e.
+$$
+
+ The derived group embeds as $S$, and $H_C/S=\mathbb G_m$, so 
+
+$$
+\pi_1(H_C)=\mathbb Z,\qquad \kappa_{H_C}=v_L\circ\chi.
+$$
+
+ The scalar central cocharacter has grade $e$. For $S=\operatorname{Spin}_{4m}$ with a half-spin $\mu_2$ glued, the other order-two center survives; the full center is not declared connected.
+
+The following parameters use the standard orthogonal or Bourbaki coordinates. The point $x$ is the facet barycenter and $q=ex$ is an adjoint cocharacter.
+
+| Type of $S$           | $e$ | Deleted vertices | $q$                          | Minimum dimension |
+|:----------------------|:----|:-----------------|:-----------------------------|:------------------|
+| $D_{2m+1}$, $m\ge2$   | 4   | $\{m,m+1\}$      | $2\sum_{j=1}^{m}e_j+e_{m+1}$ | $m-1$             |
+| $D_{2m}$, $m\ge2$     | 2   | $\{0,2m\}$       | $\omega_{2m}=(1,\ldots,1)/2$ | $m$               |
+| Second even-$D$ facet | 2   | $\{1,2m-1\}$     | $(3,1,\ldots,1,-1)/2$        | $m$               |
+| $E_6$                 | 3   | $\{0,1,6\}$      | $\omega_1+\omega_6$          | 2                 |
+| $E_7$                 | 2   | $\{0,7\}$        | $\omega_7$                   | 4                 |
+
+The other even-$D$ half-spin action exchanges the spinor ends. The two odd-$D$ primitive classes are inverse and have the same facet; the finite lemma covers both odd exponents.
+
+### 8.2. All maximizing spinorial facets
+
+Write $n$ for the rank of $D_n$. Deleting an internal orbit $\{j,n-j\}$ leaves 
+
+$$
+D_j\times A_{n-2j-1}\times D_j,
+$$
+
+ with log-volume 
+
+$$
+f(j)=2j(j-1)+\frac{(n-2j-1)(n-2j)}2.
+$$
+
+ This is strictly convex. For $n=2m+1$, the four-endpoint deletion has volume $(m-1)(2m-1)$, while $2\le j\le m$ gives 
+
+$$
+f(m)=2m(m-1),\qquad f(m)-f(2)=5(m-2),
+$$
+
+ 
+
+$$
+f(m)-(m-1)(2m-1)=m-1>0.
+$$
+
+ For $m=2$ the middle pair is the sole internal orbit. For $m>2$, convexity and these differences make $\{m,m+1\}$ the unique maximum.
+
+For $n=2m$, either endpoint-pair deletion leaves $A_{n-1}$, of volume 
+
+$$
+a=\frac{n(n-1)}2=m(2m-1).
+$$
+
+ When the internal range $2\le j\le m-1$ is nonempty, 
+
+$$
+a-f(2)=4n-14>0,\qquad a-f(m-1)=5(m-1)>0.
+$$
+
+ Deleting the fixed middle vertex leaves $D_m\times D_m$, of volume $2m(m-1)=a-m<a$. Exactly the two displayed facets maximize. Deleting several orbits removes further roots from a single-orbit deletion and strictly reduces the positive-root count. The boundary ranks $D_4,D_5$ are included; $D_2,D_3$ are type $A$.
+
+### 8.3. Actual inertia lifts and semilinear descent
+
+Take 
+
+$$
+F=L(u),\qquad u^e=t,\qquad \sigma(u)=\zeta u,
+$$
+
+ with $\zeta$ primitive of order $e$ and $\iota(z)=\zeta$. Strict henselian completeness and invertibility of $e$ supply the roots of unity and roots of units, also in mixed characteristic. Even when $q$ is not a cocharacter of $S$, 
+
+$$
+A=\operatorname{Ad}(q(u))
+$$
+
+ is an $F$-defined automorphism of $S$. Choose $s\in S(\mathcal O)$ lifting $q(\zeta)^{-1}$, and set 
+
+$$
+\delta=\operatorname{Ad}(s)\circ\sigma.
+$$
+
+ Since $\sigma(q(u))=q(\zeta)q(u)$ and $s^e$ is central, 
+
+$$
+\delta^e=1,\qquad \delta(A(h))=A(\sigma(h)).
+$$
+
+ The actual lifts can be chosen as follows.
+
+- In odd $D$, choose $\eta^2=\zeta$ and take $s=(2q)(\eta^{-1})$. Here $2q$ lies in the Spin coroot lattice but $q$ does not, and $s^4=-1$, the vector-cover kernel. Its vector spectrum is $1^{2m},(-1)^{2m},i,-i$.
+
+- In even $D$, take $s=(2q)(i)$, $i^2=-1$. Then $\rho(s)^2=-I$ and $s^2=z$. At the second facet 
+
+$$
+s_2=(e_1-e_n)(-1)s
+$$
+
+ is Spin-conjugate to $-s$, not $s$; each actual class is fixed separately.
+
+- In $E_6$, take $s=(\omega_1+\omega_6)(\zeta^{-1})$, so $s^3=1$.
+
+- In $E_7$, take $s=(2\omega_7)(i)$, so $s^2=z$.
+
+The required order is that of $\operatorname{Ad}(s)$, not of $s$. Quadratic descent permits an order-four lift, and odd-$D$ quartic descent permits an order-eight lift.
+
+### 8.4. The fixed model of the connected parahoric
+
+For a root parameter $a\in L$, 
+
+$$
+A(x_\alpha(a))=x_\alpha(u^{\alpha(q)}a),\qquad
+v_F(u^{\alpha(q)}a)=e\,v_L(a)+\alpha(q).
+$$
+
+ Thus integral fixed elements have the original root bound 
+
+$$
+v_L(a)\ge\lceil-\alpha(x)\rceil.
+$$
+
+ Consider 
+
+$$
+\mathscr P=
+\left(\operatorname{Res}_{\mathcal O_F/\mathcal O}
+S_{\mathcal O_F}\right)^\delta.
+$$
+
+ Tame fixed-point smoothness makes this model smooth. Its generic fiber is $S_L$ through $A$, and its root bounds and torus model agree with the connected parahoric.
+
+Reduction modulo $u$ maps onto $Z_{S_k}(s)$. The kernel has a jet filtration with vector-group quotients; tame invariants preserve connected unipotence. The split integral centralizer supplies constant lifts. Since $S$ is simply connected, $Z_{S_k}(s)$ is connected. This identifies the connected model, not the full facet normalizer. As $\Omega_S=1$, the facet stabilizer in $S(L)$ is $P_x$, and 
+
+$$
+A(P_x)=S(\mathcal O_F)^\delta.
+$$
+
+ The odd-$D$ facet does not contain vertex $0$; root bounds, not a finite-parabolic preimage inside $S(\mathcal O)$, are used.
+
+The surviving roots satisfy $\alpha(q)\equiv0\pmod e$, giving 
+
+$$
+\begin{array}{c|c|c}
+S&\text{derived type of }Z_S(s)&\text{central rank}\\ \hline
+D_{2m+1}&D_m\times D_m&1\\
+D_{2m}&A_{2m-1}&1\\
+E_6&D_4&2\\
+E_7&E_6&1
+\end{array}
+$$
+
+ with their full torus lattices. The $H_C$ model is $(\mathscr P\times\mathbb G_m)/C$, with reductive quotient $(Z_S(s)\times\mathbb G_m)/C$. The finite quotient is separable and $H^1(\mathcal O,C)=0$ by unit-root extraction. The full facet normalizer modulo the connected parahoric is $\mathbb Z$, measured by $v(\chi)$; only its diagram action factors through $\mathbb Z/e$.
+
+### 8.5. Central normalization of the fixed element
+
+Let $\gamma\in P_x^C\dot\tau^{\,r}$, with $\gcd(r,e)=1$ in the primitive cases. Write 
+
+$$
+\chi(\gamma)=t^ra,\quad a\in\mathcal O^\times,\qquad
+\eta_0^e=a,\qquad c=u^r\eta_0.
+$$
+
+ Over $F$, write uniquely $\gamma=[h,c]$, $h\in S(F)$. Galois invariance gives 
+
+$$
+\sigma(h)=z^{-r}h.
+$$
+
+ Because $\gamma$ fixes $x$, scalar normalization leaves the derived building unchanged, and $A$ moves that point to the hyperspecial origin. Hence $X=A(h)\in S(\mathcal O_F)$ and 
+
+$$
+\boxed{\delta(X)=z^{-r}X.}
+$$
+
+ Only the residue $\Gamma=\overline X$ satisfies the ordinary relation 
+
+$$
+s\Gamma s^{-1}=z^{-r}\Gamma.
+$$
+
+ The integral semilinear equation cannot be replaced by ordinary conjugation.
+
+### 8.6. The actual reductive-coset twist
+
+The normalized residue $N$ of a length-zero representative gives $\Gamma\in Z_S(s)N$, with the following actual actions.
+
+- Odd $D$: exchange of the $D_m$ factors, whose square is the orthogonal outer involution, and inversion on the extra central torus; fixed semisimple rank $m-1$.
+
+- Even $D$: transpose-inverse on $A_{2m-1}$ and inversion on the center; fixed rank $m$.
+
+- $E_6$: triality on $D_4$, with no fixed direction on the extra rank-two center; fixed rank $2$.
+
+- $E_7$: the diagram involution on $E_6$, with inversion on the extra center; fixed rank $4$.
+
+The classical actions follow from the vector blocks; the exceptional ones are checked from affine vertex permutations and central lattices. The scalar factor adds one to both actual and minimum centralizer dimensions. Original coset regularity is therefore exactly 
+
+$$
+\dim Z_S(s,\Gamma)=
+\begin{cases}
+m-1,&D_{2m+1},\\
+m,&D_{2m},\\
+2,&E_6,\\
+4,&E_7.
+\end{cases}
+$$
+
+ These are the finite-lemma hypotheses, not ordinary regularity assumed beforehand.
+
+### 8.7. An integral Steinberg transporter
+
+**Lemma 8.1.**
+
+Let $R$ be a complete strictly henselian DVR in the permitted characteristic, let $E=\operatorname{Frac}R$, and let $S_R$ be split simply connected. If $X_1,X_2\in S(R)$ are $S(E)$-conjugate and have ordinary regular residues, then an $a\in S(R)$ satisfies $aX_1a^{-1}=X_2$. The full scheme $Z_{S_R}(X_1)$ is smooth.
+
+**Proof.**
+
+Use the integral fundamental-character coordinates of the quotient 
+
+$$
+\chi_S:S_R\longrightarrow\mathbb A_R^{\operatorname{rk}S}.
+$$
+
+ The field-level Steinberg theorem on both geometric fibers gives smoothness on the regular locus, a single orbit per regular fiber, and smooth regular centralizers. A full-rank quotient Jacobian minor is a unit at a regular residue, so the integral quotient is smooth near the required points. For a geometric regular $X$, 
+
+$$
+\ker(d\chi_{S,X})=T_X(\text{conjugacy orbit});
+$$
+
+ both have dimension $\dim S-\operatorname{rk}S$. Consequently 
+
+$$
+S_R\times S_{\mathrm{reg}}\longrightarrow
+S_{\mathrm{reg}}\times_{\mathbb A_R^{\operatorname{rk}S}}
+S_{\mathrm{reg}},\qquad
+(a,X)\longmapsto(aXa^{-1},X)
+$$
+
+ has surjective differential and is smooth, since its source and target are smooth on these neighborhoods. Generic conjugacy gives equality of quotient coordinates in $E$, hence in $R$. The transporter is the resulting smooth pullback; the single-orbit theorem supplies a residue-field point, and strict henselian completeness lifts it. Pullback along $(X_1,X_1)$ gives the smooth full centralizer.
+
+$\square$
+
+The lemma is applied to split $S_{\mathcal O_F}$, without invoking an affine Springer transitivity theorem for a ramified group.
+
+### 8.8. Grade-zero representatives of two regular flags
+
+Translate two regular $H_C$ flag points to grade zero using Lemma 3.1, which covers the full $\pi_1(H_C)=\mathbb Z$. Their $\chi$-values are then units. Extracting scalar unit roots and absorbing them into the parahoric gives representatives 
+
+$$
+h_1,h_2\in S(L).
+$$
+
+ Put $X_i=A(h_i)^{-1}X A(h_i)$. They are integral, generically conjugate, and satisfy $\delta(X_i)=z^{-r}X_i$. The first conclusion of the finite lemmas makes their residues ordinary regular. Lemma 8.1 gives 
+
+$$
+a\in S(\mathcal O_F),\qquad aX_1a^{-1}=X_2.
+$$
+
+### 8.9. Killing the full residue-centralizer cocycle
+
+Let $\mathscr J=Z_{S_{\mathcal O_F}}(X_1)$. It is smooth and $\delta$-stable, since $\delta(X_1)$ is a central multiple of $X_1$. The discrepancy 
+
+$$
+d=a^{-1}\delta(a)\in\mathscr J(\mathcal O_F)
+$$
+
+ is a genuine cyclic cocycle. Reducing modulo $u$, 
+
+$$
+\overline d=s's^{-1},\qquad
+s'=\overline a^{-1}s\overline a.
+$$
+
+ The element $s'$ is conjugate to the actual $s$ in $S$ and obeys the same central relation for $\overline X_1$. The second finite conclusion provides 
+
+$$
+\overline b\in Z_S(\overline X_1)(k)=\mathscr J(k),\qquad
+s'=\overline b\,s\,\overline b^{-1}.
+$$
+
+ Hence $\overline d=\overline b\,\delta(\overline b)^{-1}$. Lift $\overline b$ by smoothness and replace $a$ by $ab$; the new cocycle is trivial modulo $u$. The full residue centralizer is essential: its finite central components can supply the first correction.
+
+### 8.10. Congruence averaging and descent to the original field
+
+For 
+
+$$
+\mathscr J^\ell=
+\ker\bigl(\mathscr J(\mathcal O_F)\to
+\mathscr J(\mathcal O_F/u^\ell)\bigr),\qquad \ell\ge1,
+$$
+
+ smoothness gives vector-group quotients 
+
+$$
+\mathscr J^\ell/\mathscr J^{\ell+1}
+\simeq\operatorname{Lie}(\mathscr J_k)\otimes_k
+u^\ell/u^{\ell+1}.
+$$
+
+ The cyclic action includes $\zeta^\ell$. Averaging by $1/e$ gives $H^1(C_e,\mathscr J^\ell/\mathscr J^{\ell+1})=0$. If the discrepancy lies in $\mathscr J^\ell$, its next graded class is an additive cocycle and can be killed by a lifted coboundary. Induction kills it to every order.
+
+The correcting product converges by completeness to 
+
+$$
+a_\infty X_1a_\infty^{-1}=X_2,\qquad
+\delta(a_\infty)=a_\infty,\qquad a_\infty\in S(\mathcal O_F).
+$$
+
+ The identity $\delta A=A\sigma$ makes $a_\infty=A(a_L)$ with $a_L\in S(L)$, and root bounds put $a_L\in P_x$. Thus $h_2a_Lh_1^{-1}$ centralizes $\gamma$ and sends $h_1P_x^C$ to $h_2P_x^C$. Because $H_C$ has simply connected derived group, its generic regular-semisimple centralizer is a connected torus. Restoring the initial grade translations proves $\mathsf L(H_C)$. The final element lies in the connected parahoric with grade zero; the initial translations used the full integer grades, so no normalizer decoration is lost.
+
+### 8.11. The identity-action class and adjoint spinorial classes
+
+For a grade divisible by $e$, a scalar central cocharacter removes that grade, and a scalar unit root gives the ordinary hyperspecial problem in $S$. He’s Theorem 3.5 applies. Different hyperspecial types may be transported by the $L$-group automorphism defined by the relevant adjoint point; that point need not lift to $S(L)$.
+
+For a $D_n$ spinorial class $a$, choose the corresponding $C=\langle z\rangle$. First descend through the split scalar kernel 
+
+$$
+H_C\longrightarrow S/C.
+$$
+
+ Then transfer through 
+
+$$
+S/C\longrightarrow S/Z(S),
+$$
+
+ whose Kottwitz image is $\langle a\rangle$. The fixed target element of grade $a$ does lift. Odd primitive $D$ uses $C=\mu_4$ and already reaches the adjoint group; even $D$ uses each actual half-spin subgroup, not the vector $SO$ kernel. The vector class comes from Section 5 and the zero class from ordinary Spin. Thus every adjoint $D$ class is included. For $E_6,E_7$, take $C=Z(S)$; the finite lemmas in Section 9 supply all nonzero adjoint classes by the same split-scalar descent.
+
+<a id="chapter-9"></a>
+
+## 9. Exceptional Types
+
+This section proves all the local assertions for exceptional types and then applies them to every Newton Levi subgroup. Write $S$ for a split, simply connected simple group and $S_{\mathrm{ad}}$ for its adjoint group. Throughout, we impose the field and characteristic assumptions of Section 1, in particular $\operatorname{char}k=0$ or $p\nmid |W(G)|$. These assumptions remain valid for every Levi subgroup and every simple factor of its root system.
+
+### 9.1. Covered cases and the remaining local assertions
+
+The algebraic fundamental groups of the simple adjoint exceptional groups are as follows: 
+
+$$
+\begin{array}{c|ccccc}
+\text{Type}&G_2&F_4&E_6&E_7&E_8\\ \hline
+\pi_1(S_{\mathrm{ad}})&0&0&\mathbb Z/3&\mathbb Z/2&0.
+\end{array}\tag{1}
+$$
+
+In the basic adjoint case, the Newton vector is zero. Thus $G_2,F_4,E_8$ have only the zero Kottwitz class, their length-zero action is the identity, and their endpoints of maximal volume are hyperspecial. He’s theorem for the ordinary integral case, recalled in Section 2, gives the required local transitivity. The centralizer of a regular semisimple element in any of these groups is a connected torus, so the acting group here is precisely the identity component of the centralizer.
+
+The zero adjoint Kottwitz classes in $E_6,E_7$ lift to the simply connected groups and are also handled by the ordinary integral case and the fixed-element lifting lemma of Section 3. The remaining classes are exactly the two nonzero classes in $E_6$ and the unique nonzero class in $E_7$. They are handled by the finite-dimensional lemmas below and the tame integral descent lemma of Section 8. We do not identify these nonzero Kottwitz classes with the ordinary integral case, even though their Newton vector is zero.
+
+### 9.2. All very special endpoints for nonzero classes and the exact inertia lifts
+
+We use Bourbaki numbering: the main chain in $E_6,E_7,E_8$ is $1-3-4-5-6(-7-8)$, and node $2$ is attached to node $4$. Write $\omega_i^\vee$ for the fundamental coweights. Roots and coroots are naturally identified in these simply laced root systems, but all quantities used below to act on tori are coweights or coroots.
+
+Let $z$ generate $Z(S)$, and put $e=|Z(S)|$. Choose a primitive $e$-th root of unity $\zeta\in\mathcal O$, and fix an isomorphism $\iota:Z(S)\longrightarrow\mu_e$ with $\iota(z)=\zeta$. Construct the central envelope 
+
+$$
+H^+=(S\times\mathbb G_m)/
+ \{(c,\iota(c)^{-1}):c\in Z(S)\},
+\qquad
+\chi([h,a])=a^e.\tag{2}
+$$
+
+ Its derived group is $S$, its algebraic fundamental group is $\pi_1(H^+)=\mathbb Z$, and the Kottwitz grade is measured by $v(\chi)$. The grade of a scalar central cocharacter is $e$.
+
+The node orbits of the nonzero length-zero actions and the volumes obtained by deleting one orbit are listed below. Here volume comparisons mean comparisons of the numbers of positive roots in the reductive quotients.
+
+| Type  | Node orbits of the nonzero action             | Volumes after deleting the respective orbits |
+|:------|:----------------------------------------------|:---------------------------------------------|
+| Type  | Node orbits of the nonzero action             | Volumes after deleting the respective orbits |
+| $E_6$ | $\{0,1,6\},\ \{2,3,5\},\ \{4\}$               | $12,\ 4,\ 9$                                 |
+| $E_7$ | $\{0,7\},\ \{1,6\},\ \{3,5\},\ \{2\},\ \{4\}$ | $36,\ 14,\ 9,\ 28,\ 13$                      |
+
+Deleting at least two orbits removes further roots and strictly decreases the volume. Consequently, the unique very special endpoint for a nonzero $E_6$ class deletes $\{0,1,6\}$, and the unique very special endpoint for the nonzero $E_7$ class deletes $\{0,7\}$. The inverse generator in $E_6$ has the same node orbits and the same maximal endpoint.
+
+The corresponding fixed points, cocharacters, and actual simply connected inertia lifts are the following.
+
+| Type  | $e$ | $x$                               | $q=ex$                        | Actual lift $s$                 | $s^e$ |
+|:------|:----|:----------------------------------|:------------------------------|:--------------------------------|:------|
+| Type  | $e$ | $x$                               | $q=ex$                        | Actual lift $s$                 | $s^e$ |
+| $E_6$ | $3$ | $(\omega_1^\vee+\omega_6^\vee)/3$ | $\omega_1^\vee+\omega_6^\vee$ | $q(\zeta^{-1})$                 | $1$   |
+| $E_7$ | $2$ | $\omega_7^\vee/2$                 | $\omega_7^\vee$               | $(2\omega_7^\vee)(i)$, $i^2=-1$ | $z$   |
+
+For $E_6$, the explicit integral coroot expression is 
+
+$$
+q=2\alpha_1^\vee+2\alpha_2^\vee+3\alpha_3^\vee
+ +4\alpha_4^\vee+3\alpha_5^\vee+2\alpha_6^\vee.\tag{3}
+$$
+
+ Thus $q$ itself is a cocharacter of $S$. For $E_7$, $q$ is an adjoint cocharacter and $2q$ belongs to the coroot lattice. The action of $q$ in the adjoint group still defines an inner automorphism of $S$. In both cases, the adjoint image of $s$ is $q(\zeta)^{-1}$. In particular, the actual $E_7$ lift $s$ has order four although its adjoint image has order two. The cocycle conditions below retain $s^2=z$; they do not replace it with a lift having square $1$.
+
+A root subgroup $U_\alpha$ survives in the reductive quotient if and only if $e$ divides $\alpha(q)$. For $E_6$, the sum of the coefficients at nodes $1,6$ of a positive root is $0,1$, or $2$; the surviving roots are therefore exactly a $D_4$ root system. For $E_7$, the coefficient at node $7$ of a positive root is $0$ or $1$; the surviving roots are exactly an $E_6$ root system. The torus ranks remain $6,7$, respectively. Hence 
+
+$$
+\begin{gathered}
+\text{The derived types and central ranks of }Z_S(s)
+\text{ are }(D_4,2)\text{ and }(E_6,1),\\
+\dim Z_S(s)=30,\ 79,
+\end{gathered}\tag{4}
+$$
+
+ respectively.
+
+The normalized residual length-zero action is triality on $D_4$ and diagram reversal on $E_6$. Its fixed rank on the derived torus is $2$ in the former case and $4$ in the latter. The fixed ranks of the full affine Weyl actions are also $2,4$, respectively, so the additional two-dimensional and one-dimensional central directions have no nonzero fixed vectors. The minimal centralizer dimensions in these actual disconnected cosets are therefore $2,4$. Incorporating the scalar center in (2) increases both dimensions by one.
+
+### 9.3. A common statement of the two finite-dimensional lemmas
+
+**Lemma 9.1 (Finite almost-commuting lemma).**
+
+Use the actual $s$ of Subsection 9.2. Suppose that $\Gamma\in S(k)$ satisfies 
+
+$$
+s\Gamma s^{-1}=z^{-r}\Gamma,\qquad e\nmid r,
+\qquad
+\dim Z_S(s,\Gamma)=
+\begin{cases}
+2,&S\text{ has type }E_6,\\
+4,&S\text{ has type }E_7.
+\end{cases}\tag{5}
+$$
+
+ Then $\Gamma$ is an ordinary regular element of $S$. Moreover, if $s'$ is conjugate to the actual $s$ in $S(k)$ and satisfies the same almost-commuting relation with $\Gamma$, there exists $c\in Z_S(\Gamma)(k)$, in the full centralizer, such that $s'=csc^{-1}$.
+
+We prove both assertions below. The proof includes every semisimple Jordan sector and every unipotent residual pattern.
+
+### 9.4. Choosing a stable Borel subgroup and torus first
+
+Write $\Gamma=\Gamma_s\Gamma_u$, and let $R=Z_S(\Gamma_s)$. Since $S$ is simply connected, the semisimple centralizer $R$ is connected and reductive and has the full rank of $S$. Relation (5) shows that $\theta=\operatorname{Ad}(s)$ preserves $R$, with $\theta(\Gamma_s)=z^{-r}\Gamma_s$ and $\theta(\Gamma_u)=\Gamma_u$.
+
+We use the stable Borel theorem for finite-order automorphisms: over an algebraically closed field, an automorphism of a connected reductive group whose finite order is prime to the characteristic stabilizes a Borel subgroup and a maximal torus in it. Equivalently, it is a quasi-semisimple element in the corresponding disconnected reductive semidirect product. Here the order of $\theta$ divides $e$, so we first obtain a $\theta$-stable pair $T\subset B\subset R$, without using any conclusion about the regularity of $\Gamma_u$.
+
+The torus $T$ is also maximal in $S$, and $\Gamma_s\in Z(R)\subset T$. Let $w$ be the Weyl element induced by $s$ on $T$. For each $w$-invariant weight $\lambda\in X^*(T)$, we have 
+
+$$
+\lambda(\Gamma_s)=\lambda(w(\Gamma_s))
+ =\lambda(z^{-r})\lambda(\Gamma_s),
+\qquad \lambda(z^{-r})=1.\tag{6}
+$$
+
+ This central-charge condition excludes the inadmissible Weyl classes.
+
+### 9.5. The Weyl classes in $E_6$ and all fixed-root phases
+
+We use the finite Carter-class classification of $W(E_6)$: the nonidentity order-three classes are exactly $A_2,2A_2,3A_2$. The complete data required here are as follows.
+
+| Carter class | Fixed Cartan rank | Number of fixed roots | Class size |
+|:-------------|------------------:|----------------------:|-----------:|
+| Carter class | Fixed Cartan rank | Number of fixed roots | Class size |
+| $A_2$        |               $4$ |                  $12$ |      $240$ |
+| $2A_2$       |               $2$ |                   $6$ |      $480$ |
+| $3A_2$       |               $0$ |                   $0$ |       $80$ |
+
+This table can also be obtained by finite integral-lattice operations: generate all $51840$ integral Weyl matrices using 
+
+$$
+s_i(\alpha_j)
+=\alpha_j-\langle\alpha_j,\alpha_i^\vee\rangle\alpha_i,
+$$
+
+ select the order-three matrices, and take conjugacy closures under the six generators. This gives the three classes in the table. We are using the complete finite root-system classification, rather than deducing geometric transitivity from numerical checks in finitely many orders.
+
+A representative of the $A_2$ class is $s_1s_3$. It fixes the fundamental weight $\omega_6$, which is nontrivial on $Z(S)=\mu_3$; the relevant inverse-Cartan entry is $2/3$. This class is therefore excluded by (6). The identity class is excluded in the same way.
+
+If $w$ belongs to $3A_2$, there are no fixed Cartan directions and the $72$ roots form $24$ three-cycles. The product of the phases around each three-cycle is $1$, so each contributes one fixed direction. This would give $\dim Z_S(s)=24$, contradicting (4). Thus $w$ must belong to $2A_2$, and it may be conjugated to the linear part of the affine rotation 
+
+$$
+(0\ 1\ 6)(2\ 3\ 5),\qquad 4\text{ fixed},\tag{7}
+$$
+
+ or to its inverse. Its fixed Cartan dimension is $2$. Its six fixed roots form $A_2$, and the other $66$ roots form $22$ three-cycles. If $f_+$ is the number of fixed-root spaces with phase $1$, then 
+
+$$
+\dim Z_S(s)=2+22+f_+=30.\tag{8}
+$$
+
+ Consequently $f_+=6$: the phase on every fixed-root space is $1$. This compares integer eigenspace dimensions; it does not reduce equality of traces modulo the characteristic. Replacing $\zeta$ by $\zeta^{-1}$, or replacing $r$ by the other nonzero class modulo $3$, merely interchanges the nontrivial phases. The argument thus handles both nonzero $E_6$ classes.
+
+### 9.6. Orthogonal-reflection classification in $E_7$ and fixed-root phases
+
+Every involution in the Weyl group is a product of reflections in mutually orthogonal roots. Let $a$ be the number of reflections, equivalently the dimension of the negative Cartan eigenspace.
+
+If $a=0$, a weight with nontrivial central charge is automatically fixed, contradicting (6). For $a=1$ or $2$, transitivity on roots and on orthogonal root pairs allows us to use $s_1$ or $s_1s_2$ as a representative. Both fix $\omega_7$, whereas $\omega_7(z)=-1$; its central pairing is $3/2$. These cases are likewise inadmissible.
+
+If $a\ge4$, the fixed Cartan rank is $r_0=7-a\le3$. The fixed root system has rank at most $3$, so its number $f$ of roots is at most $12$. Each nonfixed pair of roots contributes one fixed direction. Hence 
+
+$$
+\dim\mathfrak s^{\operatorname{Ad}s}
+\le r_0+\frac{126-f}{2}+f
+\le3+\frac{126+12}{2}=72<79.\tag{9}
+$$
+
+Only $a=3$ remains. Its classification can be proved directly without enumerating $W(E_7)$. The perpendicular root system of one root is $D_6$; the common perpendicular root system of two orthogonal roots is $D_4+A_1$. A third perpendicular root lies in either the $D_4$ or the $A_1$ factor, and the Weyl group stabilizing the first two roots acts transitively on each kind of choice. The resulting two classes have common perpendicular root systems $A_1^4$ and $D_4$, with $8$ and $24$ fixed roots, respectively.
+
+For the first class, the fixed dimension is at most $4+(126+8)/2=71$, so it is inadmissible. The second class has fixed Cartan rank $4$, and its nonfixed roots form $51$ pairs. Therefore 
+
+$$
+79=\dim\mathfrak s^{\operatorname{Ad}s}=4+51+f_+,
+\qquad f_+=24.\tag{10}
+$$
+
+ Every fixed-root space has phase $+1$. Again, this is an integer dimension calculation and is unchanged in the allowed positive characteristics.
+
+We may take $w$ to be the linear part of the affine $\Omega$-involution: 
+
+$$
+\alpha_1\leftrightarrow\alpha_6,\quad
+\alpha_3\leftrightarrow\alpha_5,\quad
+\alpha_2\mapsto\alpha_2,\quad
+\alpha_4\mapsto\alpha_4,\quad
+\alpha_7\mapsto-\widetilde\alpha,\tag{11}
+$$
+
+ where 
+
+$$
+\widetilde\alpha
+=2\alpha_1+2\alpha_2+3\alpha_3+4\alpha_4
+ +3\alpha_5+2\alpha_6+\alpha_7.\tag{12}
+$$
+
+ A simple system of the fixed $D_4$ consists of the central root $\alpha_2$ and the three arms 
+
+$$
+\alpha_4,\qquad
+\alpha_3+\alpha_4+\alpha_5,\qquad
+\alpha_1+\alpha_3+\alpha_4+\alpha_5+\alpha_6.\tag{13}
+$$
+
+### 9.7. From folded regularity to ordinary regularity for every Jordan pattern
+
+In the stable Borel pair chosen in Subsection 9.4, $\theta$ permutes the simple roots of $R$. We have proved that the phase on every fixed simple-root space is $1$; the product of the phases on each length-$e$ orbit of simple-root spaces is also $1$. Rescaling root parameters successively around each orbit makes $\theta$ preserve a pinning. Its action on the central torus is retained.
+
+All roots within any simple-root orbit are mutually orthogonal. For an order-three action, the only possibilities on the diagram are a cyclic permutation of isomorphic factors and $D_4$ triality, for which the assertion holds. For an order-two action, suppose an orbit contained adjacent simple roots $\alpha,\beta$. After normalizing the root vectors, the phase of $\theta$ on $\mathfrak g_{\alpha+\beta}=k[X_\alpha,X_\beta]$ would be $-1$, since $\theta$ interchanges the two entries of the bracket. But $\alpha+\beta$ is a $w$-fixed root of the ambient system, and Subsection 9.6 shows that its phase must be $+1$. The invertibility of $2$ makes this a contradiction. Thus no linked folding arising from adjacent roots occurs here.
+
+Let $R_0=(R^\theta)^\circ$. The identity component of a pinned fixed group is reductive, with maximal torus $(T^\theta)^\circ$, and its rank is $2$ or $4$, respectively. The order of the component group of the full fixed group is prime to $p$: lift the action to the product of the simply connected cover of the derived group and the central torus. The pinned fixed group of the derived group is connected, the fixed-torus component group is killed by $e$, and the relevant central-isogeny degrees for the root subsystems are prime to $p$. Consequently $\Gamma_u\in R_0$. In characteristic zero, the algebraic group generated by a unipotent element is connected. In characteristic $p$, its image in the finite component group has $p$-power order and hence must be trivial.
+
+Now (5) implies 
+
+$$
+\dim Z_{R_0}(\Gamma_u)=\operatorname{rank}R_0.\tag{14}
+$$
+
+ Thus $\Gamma_u$ is regular unipotent in $R_0$. Conjugate it within $R_0$ into the unipotent radical of the fixed positive Borel. For an orthogonal orbit $\mathcal A$, the folded simple-root subgroup is parametrized by $\prod_{\alpha\in\mathcal A}x_\alpha(a)$. These root groups commute, so its image in $U_R/[U_R,U_R]$ has the nonzero diagonal coordinate in every direction of the orbit. The regular-unipotent criterion requires every folded simple coordinate to be nonzero. Hence every simple-root coordinate in the original group $R$ is nonzero as well. This is exactly the ordinary regular-unipotent criterion in $R$. A cyclic permutation of isomorphic factors gives diagonal principal unipotents in all factors, and torus factors impose no additional condition.
+
+Therefore $\Gamma_u$ is regular in $R$, and 
+
+$$
+\dim Z_S(\Gamma)
+=\dim Z_R(\Gamma_u)=\operatorname{rank}R
+=\operatorname{rank}S.\tag{15}
+$$
+
+ This proves the first assertion of Lemma 9.1. The argument neither presupposes ordinary regularity of $\Gamma$ nor restricts the spectrum of $\Gamma_s$, and it does not require the residual element to be semisimple.
+
+### 9.8. The full centralizer and the injection of its central cocycles
+
+Put $C=Z_S(\Gamma)$. In the allowed characteristics, the structure of a regular-unipotent centralizer gives 
+
+$$
+C=Z(R)\times U,\tag{16}
+$$
+
+ where $U$ is connected and unipotent. Here $Z(R)$ is the full smooth diagonalizable center, including any finite components; it cannot be replaced by $Z(R)^\circ$. For the tame cyclic action, $H^1(C_e,U(k))$ is trivial, so $H^1(C_e,C(k))$ reduces to $H^1(C_e,Z(R)(k))$.
+
+The character lattice of $T/Z(R)$ is the root lattice of $R$, and $\theta$ permutes its simple-root basis. Thus $(T/Z(R))^\theta$ is a connected torus. Taking invariants under a finite tame group is exact on vector spaces, so the differential of $T^\theta\longrightarrow(T/Z(R))^\theta$ is surjective. Its image is a closed subgroup of full dimension in a connected target and therefore is surjective on $k$-points. The cohomology exact sequence yields 
+
+$$
+H^1(C_e,C(k))=H^1(C_e,Z(R)(k))
+\lhook\joinrel\longrightarrow H^1(C_e,T(k)).\tag{17}
+$$
+
+Since $S$ is simply connected, $X_*(T)=Q^\vee$, the coroot lattice. The calculation of tame cyclic torus cohomology over an algebraically closed field gives 
+
+$$
+H^1(C_e,T(k))\simeq(Q^\vee)^w/NQ^\vee,
+\qquad N=1+w+\cdots+w^{e-1}.\tag{18}
+$$
+
+### 9.9. The integral norm lattice in $E_6$ and exclusion of the nontrivial classes
+
+For (7) or its inverse, set $b=\alpha_2^\vee+\alpha_3^\vee+\alpha_5^\vee$. A direct calculation in the coroot basis gives 
+
+$$
+(Q^\vee)^w=\mathbb Zb\oplus\mathbb Z\alpha_4^\vee,
+\qquad
+NQ^\vee=\mathbb Zb\oplus3\mathbb Z\alpha_4^\vee.\tag{19}
+$$
+
+ To make the integral index explicit, the six columns of $N\alpha_i^\vee$ in the basis $(b,\alpha_4^\vee)$ are 
+
+$$
+(-2,-3),\ (1,0),\ (1,0),\ (0,3),\ (1,0),\ (-2,-3).\tag{20}
+$$
+
+ Hence the cohomology is $\mathbb Z/3$, and the two nontrivial classes are represented by $\alpha_4^\vee(\zeta)$ and $\alpha_4^\vee(\zeta^2)$. The six fixed roots are 
+
+$$
+\pm\alpha_4,\qquad
+\pm(\alpha_2+\alpha_3+\alpha_4+\alpha_5),\qquad
+\pm(\alpha_2+\alpha_3+2\alpha_4+\alpha_5).\tag{21}
+$$
+
+ For either nontrivial representative, the phase multiplicities on these six roots are $(0,3,3)$: the phases $1,\zeta,\zeta^2$ occur $0,3,3$ times, respectively. For $as$, the $22$ nonfixed three-cycles still contribute $22$ fixed directions, the Cartan contributes $2$, and the six fixed roots no longer contribute any fixed directions. Therefore 
+
+$$
+\dim Z_S(as)=24\ne30=\dim Z_S(s).\tag{22}
+$$
+
+### 9.10. The integral norm lattice in $E_7$ and exclusion of the nontrivial classes
+
+For (11), an integral basis of the invariant coroot lattice is 
+
+$$
+\begin{gathered}
+b_1=\alpha_1^\vee+\alpha_6^\vee,\qquad
+b_2=\alpha_3^\vee+\alpha_5^\vee,\\
+b_3=\alpha_2^\vee,\qquad b_4=\alpha_4^\vee.
+\end{gathered}\tag{23}
+$$
+
+ The norms of the seven simple coroots, in their order, are 
+
+$$
+b_1,\ 2b_3,\ b_2,\ 2b_4,\ b_2,\ b_1,\
+-2b_1-3b_2-2b_3-4b_4.\tag{24}
+$$
+
+ It follows that 
+
+$$
+(Q^\vee)^w/NQ^\vee\simeq(\mathbb Z/2)^2.\tag{25}
+$$
+
+ The three nontrivial classes are represented by $\alpha_2^\vee(-1)$, $\alpha_4^\vee(-1)$, and their product. On the twenty-four roots of the fixed $D_4$, the pairing 
+
+$$
+\bigl(\langle\alpha,\alpha_2^\vee\rangle,
+       \langle\alpha,\alpha_4^\vee\rangle\bigr)\bmod2
+$$
+
+ takes precisely the values $(1,0),(0,1),(1,1)$, each eight times. This follows directly from the $D_4$ simple system in (13). Thus every nontrivial representative has eight positive and sixteen negative phases on the fixed roots. Each of the $51$ nonfixed pairs retains one fixed direction, so 
+
+$$
+\dim Z_S(as)=4+51+8=63\ne79=\dim Z_S(s).\tag{26}
+$$
+
+### 9.11. Completion of the centralizer-conjugacy assertion in the finite lemma
+
+Let $s'$ be the competing lift in Lemma 9.1, and put $d=s's^{-1}$. The two identical almost-commuting relations imply $d\in C$. Since $s'$ is conjugate to the actual $s$, their actual central powers agree: $s'^e=s^e$. Consequently 
+
+$$
+d\,\theta(d)\cdots\theta^{e-1}(d)=1,\tag{27}
+$$
+
+ and $d$ is a genuine cyclic cocycle in the full centralizer. First remove the unipotent part by conjugation in $C$, and then use torus conjugation to reduce its image to one of the representatives in (19) or (25). If its class were nontrivial, (22) or (26) would give centralizer dimension $24$ or $63$ for $s'$, contradicting its conjugacy to the actual $s$. Its torus class is therefore trivial. By (17), its class in the full centralizer is trivial as well. Being a coboundary means precisely that $s'=csc^{-1}$ for some $c\in C(k)$. This completes the proof of Lemma 9.1.
+
+### 9.12. Checking every geometric condition of tame integral descent
+
+Apply the uniform tame integral descent lemma of Section 8 to the parameters of Subsection 9.2. We give the checks and the actual descent relation here to show that the finite lemma handles the regular partial fiber in the original group, rather than only a calculation over the residue field.
+
+Let $F=L(u)$, where $u^e=t$ and $\sigma(u)=\zeta u$, and set 
+
+$$
+A=\operatorname{Ad}(q(u)),\qquad
+\delta=\operatorname{Ad}(s)\sigma.\tag{28}
+$$
+
+ For $E_7$, the adjoint cocharacter defines $A$, and the resulting automorphism of the simply connected group $S_F$ is well defined. The table of actual lifts gives 
+
+$$
+\delta^e=1,\qquad \delta A=A\sigma,\qquad
+v_F(u^{\alpha(q)}a)=e\,v_L(a)+\alpha(q).\tag{29}
+$$
+
+ Thus, under the identification by $A$, the tame fixed model 
+
+$$
+\bigl(\operatorname{Res}_{\mathcal O_F/\mathcal O}
+S_{\mathcal O_F}\bigr)^\delta
+$$
+
+ has root-subgroup bounds $v_L(a)\ge\lceil-\alpha(x)\rceil$, exactly those of the connected parahoric at $x$. Smoothness of the fixed model follows by averaging infinitesimal lifting obstructions with $1/e$. Its reductive quotient is $Z_S(s)$ in (4), and the kernel of reduction is a connected unipotent jet group. Since semisimple centralizers in the simply connected group are connected, this model is not a full facet normalizer with additional components. In $H^+$, the corresponding reductive quotient is $(Z_S(s)\times\mathbb G_m)/Z(S)$. The full facet stabilizer modulo its connected parahoric is $\mathbb Z$, measured by $v(\chi)$; only its diagram action factors through $\mathbb Z/e$.
+
+Suppose the fixed element is $\gamma\in P^+\dot\tau^r$, with $e\nmid r$. Write $\chi(\gamma)=t^r a$, choose $\eta\in\mathcal O^*$ satisfying $\eta^e=a$, and express it over $F$ as $\gamma=[h,u^r\eta]$. The sign in the central quotient (2) gives 
+
+$$
+\sigma(h)=z^{-r}h,\qquad
+X=A(h)\in S(\mathcal O_F),\qquad
+\delta(X)=z^{-r}X.\tag{30}
+$$
+
+ Here integrality of $X$ follows because $\gamma$ fixes $x$: after applying $A$, it fixes the hyperspecial origin over $F$. Only after reduction modulo $u$ do we obtain $s\overline Xs^{-1}=z^{-r}\overline X$. The semilinear relation (30) over the integral ring cannot be replaced by an ordinary almost-commuting relation.
+
+The element $\overline X$ lies in the actual disconnected normalizer coset checked in Subsection 9.2: triality of $D_4$ or diagram reversal of $E_6$, with no fixed directions on the additional center. Regularity in the original residual coset for $H^+$ is therefore equivalent to $\dim Z_S(s,\overline X)=2$ or $4$. The scalar center adds one dimension in each case, and the finite central quotient does not change dimensions. Lemma 9.1 therefore makes each such $\overline X$ an ordinary regular element.
+
+Take two regular flag points. First use the identity-component centralizer torus to move their full $\pi_1(H^+)=\mathbb Z$ grades to zero. Surjectivity of the torus Kottwitz map from Section 3 ensures that this retains all central labels. The $e$-th root of their scalar unit can be absorbed into the parahoric, so choose representatives $h_1,h_2\in S(L)$. Set 
+
+$$
+X_i=A(h_i)^{-1}X A(h_i).
+$$
+
+ They are integral, conjugate over $F$, satisfy the same relation (30), and have ordinary regular reductions.
+
+The integral Steinberg quotient of a split simply connected group is smooth at these points. Fundamental characters give integral quotient coordinates, whose differentials have full rank at regular residual points. A regular fiber is a single geometric conjugacy orbit, and the kernel of the quotient differential is the tangent space to that orbit. Consequently the relative action morphism 
+
+$$
+S\times S^{\mathrm{reg}}\longrightarrow
+S^{\mathrm{reg}}\times_{S//S}S^{\mathrm{reg}}\tag{31}
+$$
+
+ is smooth. Equality of quotient invariants on the generic fiber is equality of the integral invariants. The transporter thus has a $k$-point and, by complete smooth lifting, an element $a\in S(\mathcal O_F)$ with $aX_1a^{-1}=X_2$. The full group scheme $J=Z_{S_{\mathcal O_F}}(X_1)$ is smooth and is $\delta$-stable by the central-multiple relation (30).
+
+The error $d=a^{-1}\delta(a)$ is a cyclic cocycle in $J(\mathcal O_F)$. Modulo $u$, it satisfies 
+
+$$
+\overline d=s's^{-1},\qquad
+s'=\overline a^{-1}s\overline a.\tag{32}
+$$
+
+ The actual $s'$ is conjugate to the actual $s$ and satisfies the same relation with $\overline X_1$. The second assertion of Lemma 9.1 supplies a coboundary in the full $J(k)$, killing the error modulo $u$. Smoothness permits the correcting element to be lifted integrally. Every subsequent congruence layer is a Lie-algebra vector group. Its cyclic action includes the factor $\zeta^\ell$ contributed by the uniformizer at that layer, and its $H^1$ vanishes by averaging with $1/e$. Successive corrections and completeness produce a $\delta$-fixed $a_\infty$ still satisfying $a_\infty X_1a_\infty^{-1}=X_2$.
+
+By (29), $a_\infty=A(a_L)$, and the root bounds place $a_L$ in the connected parahoric of $S(L)$. Thus $h_2a_Lh_1^{-1}$ centralizes the original $\gamma$ and transports the two original flag points. The generic regular semisimple centralizer in $H^+$ is a connected torus, so this transporter belongs to the identity-component centralizer. Restoring the initial torus grade translations keeps it in that same identity torus. When $e\mid r$, a scalar central element of grade $e$ moves the fixed element to grade zero, after which the ordinary hyperspecial case applies. Thus every basic grade of $H^+$ has been covered.
+
+These checks apply identically to $\mathcal O=k[[t]]$ and $\mathcal O=W(k)$: $e$ is invertible, strict Henselianity supplies the required roots of unity and $e$-th roots of units, and the integral Steinberg quotient and smooth lifting apply in both settings. We have not compared numbers of affine Springer components over $F$ and over $L$.
+
+### 9.13. Transfer to adjoint $E_6,E_7$ and arbitrary central forms
+
+The kernel of $H^+\longrightarrow S/Z(S)$ is the split scalar torus $\mathbb G_m$. Hilbert 90 lifts the fixed element and the variable flag points. The injection of the kernel’s cocharacter lattice into $\pi_1(H^+)$ ensures that any extra central factor after lifting has valuation zero and can be absorbed into the parahoric. Regularity is preserved under central quotients. The local transitivity of Subsection 9.12 therefore descends to the adjoint group, handling the two nonzero classes in $E_6$ and the unique nonzero class in $E_7$. The zero classes were handled in Subsection 9.1.
+
+For any split reductive central form and any actual Newton Levi subgroup $M$, apply the universal central-form transfer proved in Section 3. Specifically, take a split central-torus extension $H\longrightarrow M$ with simply connected $H_{\mathrm{der}}$, and use the natural finite central isogeny 
+
+$$
+H\longrightarrow H_{\mathrm{ad}}\times(H/H_{\mathrm{der}}).\tag{33}
+$$
+
+ Its Kottwitz image is a graph inside the product of the adjoint fundamental group and the free abelianization lattice. The grade of a target identity-centralizer transporter is the difference of two grades allowed in the source, so it lifts to $H$. The inverse image of the target identity torus is a maximal torus of the source; consequently the lift still centralizes the fixed element. Finally descend to $M$ through the split central kernel. This retains all central couplings among factors without requiring an arbitrary fixed element to lift beforehand to a specified finite simply connected cover.
+
+### 9.14. Node-by-node classification of every proper Newton Levi
+
+For a dominant Newton vector, the simple-root set of the standard Newton Levi is 
+
+$$
+J=\{\alpha:\langle\alpha,\nu_\gamma\rangle=0\}.
+$$
+
+ Every proper $J$ is contained in a root subset obtained by deleting a single node. The following complete single-node deletion table therefore also proves exhaustiveness for all proper Levi subgroups.
+
+| Ambient type | Deleted node | Semisimple type of the maximal proper Levi |
+|:-------------|:-------------|:-------------------------------------------|
+| Ambient type | Deleted node | Semisimple type of the maximal proper Levi |
+| $G_2$        | Either node  | $A_1$                                      |
+| $F_4$        | $1$          | $C_3$                                      |
+| $F_4$        | $2$          | $A_1\times A_2$                            |
+| $F_4$        | $3$          | $A_2\times A_1$                            |
+| $F_4$        | $4$          | $B_3$                                      |
+| $E_6$        | $1$ or $6$   | $D_5$                                      |
+| $E_6$        | $2$          | $A_5$                                      |
+| $E_6$        | $3$ or $5$   | $A_1\times A_4$                            |
+| $E_6$        | $4$          | $A_1\times A_2\times A_2$                  |
+| $E_7$        | $1$          | $D_6$                                      |
+| $E_7$        | $2$          | $A_6$                                      |
+| $E_7$        | $3$          | $A_1\times A_5$                            |
+| $E_7$        | $4$          | $A_1\times A_2\times A_3$                  |
+| $E_7$        | $5$          | $A_2\times A_4$                            |
+| $E_7$        | $6$          | $D_5\times A_1$                            |
+| $E_7$        | $7$          | $E_6$                                      |
+| $E_8$        | $1$          | $D_7$                                      |
+| $E_8$        | $2$          | $A_7$                                      |
+| $E_8$        | $3$          | $A_1\times A_6$                            |
+| $E_8$        | $4$          | $A_1\times A_2\times A_4$                  |
+| $E_8$        | $5$          | $A_3\times A_4$                            |
+| $E_8$        | $6$          | $D_5\times A_2$                            |
+| $E_8$        | $7$          | $E_6\times A_1$                            |
+| $E_8$        | $8$          | $E_7$                                      |
+
+For $F_4$, the numbering is $1-2\Rightarrow3-4$, with subdiagram $\{1,2,3\}$ of type $B_3$ and subdiagram $\{2,3,4\}$ of type $C_3$. Further deletion in type $A$ produces only smaller type-$A$ factors, and deletion in types $B,C,D$ produces only smaller classical factors. Applying the preceding table recursively gives the following precise bounds on the possible factors.
+
+| Ambient type | Possible simple factors in a proper Levi            |
+|:-------------|:----------------------------------------------------|
+| Ambient type | Possible simple factors in a proper Levi            |
+| $G_2$        | $A_1$                                               |
+| $F_4$        | $A_1,A_2,B_2=C_2,B_3,C_3$                           |
+| $E_6$        | $A_1$ through $A_5$, $D_4,D_5$                      |
+| $E_7$        | $A_1$ through $A_6$, $D_4$ through $D_6$, $E_6$     |
+| $E_8$        | $A_1$ through $A_7$, $D_4$ through $D_7$, $E_6,E_7$ |
+
+Here $D_2=A_1\times A_1$ and $D_3=A_3$; tori and the actual central couplings are allowed throughout. In particular, a proper $E_8$ Levi has no $E_8$ factor, a proper $E_7$ Levi has no $E_7$ factor, and a proper $E_6$ Levi has no $E_6$ factor. Thus the exceptional induction in this section is not circular.
+
+### 9.15. The actual $\mathrm{GSp}_6$ Levi in $F_4$
+
+The group $F_4$ is both simply connected and adjoint, and its character lattice is the root lattice. For a standard Levi, quotienting by the simple roots in $J$ quotients this free lattice by part of a basis. Hence the Levi center is connected. Moreover, the derived subgroup of a Levi in a simply connected group is simply connected.
+
+For the $C_3$ Levi obtained by deleting node $1$, the derived group is $\mathrm{Sp}_6$ and the connected center has rank one. Its $\mu_2=Z(\mathrm{Sp}_6)$ lies in the actual central torus, so the finite central quotient supplied by multiplication is 
+
+$$
+M_{C_3}\simeq
+(\mathrm{Sp}_6\times\mathbb G_m)/\mu_2
+\simeq\mathrm{GSp}_6.\tag{34}
+$$
+
+ Likewise the maximal $B_3$ Levi is $\mathrm{GSpin}_7$. The $C_3$ Newton Levi of $F_4$ therefore has basic classes with odd similitude valuation; the theorem for $\mathrm{Sp}_6$ alone does not handle these classes. The local theorem for $\mathrm{GSp}_{2a}$ in Section 4 includes odd multiplier grades and every very special chain, and hence provides the actual local input for (34). The $B_3$ case and its central forms are handled by the orthogonal results of Section 5 and the transfer of Section 3.
+
+### 9.16. Every Newton point in exceptional types
+
+All basic adjoint classes for classical factors of types $A,B,C,D$ were covered in the preceding sections, including the vector class and both spinorial classes in type $D$, and the odd similitude class in type $C$. All basic adjoint classes in $E_6,E_7$ are covered by Subsections 9.1–9.13. The full basic cases for $G_2,F_4,E_8$ are covered by Subsection 9.1. Subsection 9.14 exhausts all proper Newton Levi subgroups, and Subsection 9.13 transfers the local property to each actual central form. Thus every actual Newton Levi of exceptional type, every basic Kottwitz class, and every very special regular endpoint satisfy local transitivity under the identity-component centralizer torus.
+
+By the exact component reduction of He in Section 2, the set $\mathcal R$ of actual top-dimensional paths for $w=w_0t^\mu$ satisfies 
+
+$$
+C_\mu(\gamma)=\sum_{a\in\mathcal R}n_{a,\gamma},
+\qquad |\mathcal R|=\dim V_\mu(\lambda_b).\tag{35}
+$$
+
+ Every actual top-dimensional endpoint is very special. Local transitivity and the description of regular partial-fiber components give $n_{a,\gamma}=1$. Consequently 
+
+$$
+\#\bigl(Z_G(\gamma)(L)\backslash
+\Sigma^{\mathrm{top}}Y_\mu(\gamma)\bigr)
+=\dim V_\mu(\lambda_b).\tag{36}
+$$
+
+ Here $\lambda_b$ is always the best integral approximation associated with the relevant $[b]$, retaining its full Kottwitz data, rather than the rational Newton vector. The conclusion includes every exceptional simple type, all its split reductive central forms, and every Newton point.
+
+<a id="chapter-10"></a>
+
+## 10. All Root Types, Actual Newton Levis, and Completion
+
+### 10.1. The local property for every simple adjoint type
+
+The preceding results give the exhaustive table below.
+
+| Simple adjoint type | Basic grades and local proof                                                                                                                                                |
+|:--------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| $A_r$               | The general linear cyclic-lattice theorem in Section 4, descended through the split scalar kernel of $GL_{r+1}\to PGL_{r+1}$; every rotation class is included.             |
+| $B_r$               | The adjoint group is $SO_{2r+1}$; Section 5 includes the ordinary and nonzero vector classes.                                                                               |
+| $C_r$               | The even and odd multiplier classes of $GSp_{2r}$ in Section 4, descended through its split scalar kernel to $PSp_{2r}$.                                                    |
+| $D_r$               | The ordinary and vector cases of Section 5, the finite lemmas of Sections 6 and 7, and the descent of Section 8, including both half-spin and primitive order-four classes. |
+| $G_2,F_4$           | Trivial adjoint fundamental group; the full basic case is ordinary hyperspecial transitivity.                                                                               |
+| $E_6,E_7$           | The finite lemmas of Section 9 and tame integral descent, including both nonzero $E_6$ classes and the nonzero $E_7$ class.                                                 |
+| $E_8$               | Trivial adjoint fundamental group; the full basic case is ordinary hyperspecial transitivity.                                                                               |
+
+The small-rank identifications $A_1=B_1=C_1$, $D_2=A_1^2$, and $D_3=A_3$ are already included. A root-free group is a split torus; its flag points form the cocharacter lattice and are transitive under torus $L$-points.
+
+Every local transporter lies in the identity centralizer of the regular semisimple fixed element. The simply connected derived envelopes have connected generic torus centralizers; the ordinary $SO$ proof constructs its generic identity-torus model directly; and Section 3 transfers only through those tori. Connectedness of the full centralizer in an arbitrary adjoint group has not been asserted.
+
+### 10.2. Every actual Newton Levi
+
+Let $G$ now be an arbitrary split connected reductive group and let $\gamma$ be any regular semisimple element. For each actual top path $\mathfrak p$, He’s Theorem 1.3 moves the fixed element into a basic problem in the actual split Newton Levi $M_{\mathfrak p}$. Its adjoint group is a product of the simple types in the table. Log-volumes add over root factors, so a maximum must be attained in every factor; coset regularity and identity-centralizer actions factor as well. The table and split-torus translation give the property on the adjoint product times its abelianization. The central extension and graph isogeny of Section 3 transfer it to $M_{\mathfrak p}$ itself, retaining its actual central coupling. Consequently 
+
+$$
+\mathsf L(M_{\mathfrak p}),\qquad n_{\mathfrak p,\gamma}=1
+$$
+
+ for every such path. There is no bound on Newton slopes or central grades: full integer Kottwitz grades and finite diagram actions are recorded separately in the cyclic envelopes.
+
+### 10.3. The component formula
+
+Substitution in the exact formula of Section 2 gives 
+
+$$
+\begin{aligned}
+\#\left(Z_G(\gamma)(L)\backslash
+\Sigma^{\mathrm{top}}Y_\mu(\gamma)\right)
+&=\sum_{\mathfrak p\in\mathcal R}n_{\mathfrak p,\gamma}\\
+&=\sum_{\mathfrak p\in\mathcal R}1\\
+&=|\mathcal R|\\
+&=\dim V_\mu(\lambda_b).
+\end{aligned}
+$$
+
+ This completes the assembled argument for Theorem 1.1. It imposes neither integral Newton nor regular $\mu$, only nonemptiness, regular semisimplicity of $\gamma$, and the field, splitness, and characteristic assumptions stated at the beginning.
+
+### 10.4. All grades of the orthogonal central forms
+
+For a concrete check on $PSO$, $GSO$, and half-spin forms, write $N=2n\ge4$. The $D_n$ coroot and adjoint cocharacter lattices are 
+
+$$
+Q=\{a\in\mathbb Z^n:\textstyle\sum a_i\text{ even}\},\qquad
+P=\mathbb Z^n\cup(\mathbb Z+\tfrac12)^n.
+$$
+
+ Thus 
+
+$$
+\pi_1(PSO_{2n})=P/Q=
+\begin{cases}
+\mathbb Z/4,&n\text{ odd},\\
+(\mathbb Z/2)^2,&n\text{ even}.
+\end{cases}
+$$
+
+ The vector class is represented by $e_1$; the two spinorial classes by the spinor-end fundamental coweights. In odd rank they are a primitive order-four generator and its inverse; in even rank they are the two nonvector order-two classes. Sections 5–8 treat them separately.
+
+For $GSO_{2n}$, split torus cocharacters are $(a_1,\ldots,a_n;c)$, with natural weights $a_i,c-a_i$ and multiplier valuation $c$. Coroots have $c=0$ and even coordinate sum, so 
+
+$$
+\pi_1(GSO_{2n})=\mathbb Z\oplus\mathbb Z/2,\qquad
+\kappa=(c,\textstyle\sum_i a_i\bmod2).
+$$
+
+ Its adjoint image is 
+
+$$
+[a-\tfrac c2(1,\ldots,1)]\in P/Q.
+$$
+
+ The scalar central cocharacter has class $(2,n\bmod2)$. Odd multiplier valuation therefore gives a genuine spinorial adjoint class; no unavailable $L$-square root is used to reduce it to $SO$.
+
+In odd dimension there is an actual isomorphism 
+
+$$
+GSO_{2n+1}\simeq SO_{2n+1}\times\mathbb G_m.
+$$
+
+ For multiplier $\lambda$, the scalar $c=\det(g)/\lambda^n$ satisfies $c^2=\lambda$ and $c^{-1}g\in SO$, without arbitrary root extraction. Odd-dimensional $PSO$ equals $SO$. The two half-spin quotients 
+
+$$
+HSpin_{4m}^{\pm}=\operatorname{Spin}_{4m}/C_\pm
+$$
+
+ have fundamental group $\mathbb Z/2$, with images the two spinor subgroups in the adjoint group, and are both included. In odd rank $D_{2m+1}$, the half-spin representations are faithful on the order-four center; there is no additional half-spin order-two quotient. The unique order-two central quotient is $SO_{4m+2}$.
+
+The low-dimensional cases $SO_1$, $SO_2$, $GSO_1$, and $GSO_2$ are trivial or split tori. Under the projective-image convention $PSO_2=SO_2/\{\pm1\}$ is a split torus; under quotient by its full center it is trivial. Also 
+
+$$
+PSO_4=PGL_2^2,\qquad PSO_6=PGL_4.
+$$
+
+ The four-dimensional half-spin forms are $PGL_2\times SL_2$ and $SL_2\times PGL_2$, and the eight-dimensional ones are isomorphic to $SO_8$ by triality. These identifications agree with the general argument.
+
+<a id="chapter-11"></a>
+
+## 11. Inputs, Finite Checks, and References
+
+### 11.1. Dependency structure
+
+All new nonintegral-Newton steps have been expanded in the text. The standard finite-dimensional and local structural results listed in Section 1, and He’s geometric reduction, are inputs; their entire background theories are not reproved here. The dependency structure is 
+
+$$
+\text{actual top-path component formula}
+\ \Longleftarrow\
+\text{local property in every actual Newton Levi},
+$$
+
+ 
+
+$$
+\Longleftarrow\
+\text{simple adjoint local properties}
++\text{central extensions and Kottwitz graph transfer}.
+$$
+
+ The new spinorial and exceptional local properties require 
+
+$$
+\begin{gathered}
+\text{finite almost-commuting lemma}
++\text{integral Steinberg transporter}\\
++\text{full residue-cocycle correction}
++\text{tame congruence averaging}.
+\end{gathered}
+$$
+
+ Ordinary $SO$ uses the Lie quotient with its Pfaffian; types $A,C$ use cyclic lattices and integral norm correction in the original representation. All links are necessary. A Weyl-class or Levi inventory alone does not prove geometric transitivity; generic conjugacy alone does not give integral conjugacy; and retaining only the identity residue centralizer can omit finite central obstructions.
+
+### 11.2. Reproducible finite root data
+
+The following data were checked in the supporting exact computations. Their corresponding analytic proofs or standard finite classifications appear in the text.
+
+1.  All affine-$A$ rotation endpoints, affine-$C$ reversal endpoints, and ordinary/vector $B,D$ log-volume maxima.
+
+2.  Even-$D$ invariant and norm lattices and all invariant sign patterns. Checks in $D_4$ through $D_{16}$ make every nonzero class reverse the nonzero half-spin character.
+
+3.  Odd-$D$ norm lattices, fourth-root representatives, and square-spectrum dimensions, including $D_5,D_7,D_9,D_{11}$. The proof has no rank cutoff.
+
+4.  All $51\,840$ elements of $W(E_6)$ and its three order-three classes, of fixed ranks $0,2,4$ and sizes $80,480,240$.
+
+5.  The two $E_7$ orthogonal-triple involution classes, with $24,8$ fixed roots and sizes $315,3780$. The text also proves exhaustiveness using perpendicular systems $D_6$ and $D_4+A_1$.
+
+6.  The $E_6,E_7$ invariant/norm lattices and every nonzero cocycle’s fixed-root phases.
+
+7.  All $128$ standard simple-root subsets in each principal $E_7$ central form, all $256$ subsets in $E_8$, and the $57$ factor/diagram-action pairs appearing in the inventory.
+
+For example, the full $E_6$ Weyl check starts at the identity integral Cartan matrix and closes under its six simple reflections until no new matrix appears. It gives $51\,840$ matrices. Filtering nonidentity matrices whose cubes are the identity and closing representatives under simple-reflection conjugation gives the three stated classes. Roots are generated by reflection closure from positive and negative simple roots; fixed-root counts and norm lattices use integer linear algebra. Matrix columns are roots, and their coefficient bounds are checked from the highest root, so the encoding neither samples nor uses floating-point approximations.
+
+These calculations do not replace the finite regularity, smooth transporter, or descent arguments. This is a written mathematical argument, not a formal proof certificate.
+
+### 11.3. Scope and manuscript status
+
+The statement is restricted to the split groups, ground fields, and Weyl-prime characteristic hypothesis stated in Section 1, without further Newton or central-form restrictions. The standard inputs and all new local deductions are identified. Internal reviews and exact finite computations are not external peer review, publication recognition, or Lean formal certification.
+
+### 11.4. Bibliographic sources
+
+He theorem numbers throughout refer to the specified arXiv version. The Chen–Zhu count and very-special stabilizer result are invoked through He’s Theorem 3.2.
+
+1.  **\[He\]** X. He, *Irreducible components of affine Lusztig varieties*, arXiv:2502.16441v1. <https://arxiv.org/abs/2502.16441>.
+
+2.  **\[Chi\]** J. Chi, *Geometry of Kottwitz–Viehmann Varieties*, J. Inst. Math. Jussieu **21** (2022), no. 1, 1–65.
+
+3.  **\[HV\]** P. Hamacher and E. Viehmann, *Irreducible components of minuscule affine Deligne–Lusztig varieties*, Algebra Number Theory **12** (2018), 1611–1634. The best integral approximation is understood as in Definition 2.1 there and He, Section 3.2.
+
+4.  **\[Steinberg65\]** R. Steinberg, *Regular elements of semisimple algebraic groups*, Publ. Math. IHES **25** (1965), 49–80.
+
+5.  **\[Steinberg68\]** R. Steinberg, *Endomorphisms of Linear Algebraic Groups*, Mem. Amer. Math. Soc. **80** (1968). The precise tame automorphism input used here is stated in Section 1.
+
+6.  **\[Kostant\]** B. Kostant, *Lie group representations on polynomial rings*, Amer. J. Math. **85** (1963), 327–404. The manuscript uses the regular-quotient version in the permitted characteristic; orthogonal coordinates and the integral consequence are recorded explicitly in Section 5.
+
+7.  **\[Carter\]** R. W. Carter, *Conjugacy classes in the Weyl group*, Compositio Math. **25** (1972), 1–59.
+
+8.  **\[Kottwitz\]** R. E. Kottwitz, *Isocrystals with additional structure*, Compositio Math. **56** (1985), 201–220. The full torus sequence used here is stated in Sections 1 and 3.
+
+9.  **\[BT\]** F. Bruhat and J. Tits, *Groupes reductifs sur un corps local*, Parts I and II. The root bounds and tame fixed parahoric models are checked in Section 8.
