@@ -1,0 +1,451 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=28mm]{geometry}
+\usepackage{microtype}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\setlength{\emergencystretch}{2em}
+\setcounter{secnumdepth}{0}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\title{Removing the integral-Newton restriction for GL\_n and Sp\_2n}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+This argument concerns GL\_n and Sp\_2n in the equal- and
+mixed-characteristic settings of the uploaded paper. It does not claim
+the extension for every split reductive group, nor a Lean formalization.
+No claim of novelty is made.
+
+\textbf{Further extension:} \url{general-extension.md}, using the
+additional \href{gsp-proof.md}{GSp argument}, treats type-A/C Newton
+Levis and split G2. The conjecture for arbitrary split reductive groups
+is still not proved.
+
+\section{The statement}\label{the-statement}
+
+Let k be algebraically closed and take either L = k((t)), O =
+k{[}{[}t{]}{]}, or L = W(k){[}1/p{]}, O = W(k), t = p, as in §1.1 of the
+uploaded paper. Assume the characteristic hypotheses of Xuhua He,
+\emph{Irreducible components of affine Lusztig varieties},
+arXiv:2502.16441v1: char(k) = 0 or char(k) does not divide the order of
+the Weyl group. Let
+
+\[
+ G=\mathrm{GL}_n\quad\text{or}\quad G=\mathrm{Sp}_{2n}.
+\]
+
+Let gamma in G(L) be regular semisimple. Let mu be dominant and
+Y\_mu(gamma) nonempty. Associate {[}b{]} to gamma as in He, §1.2, and
+let lambda\_gamma = lambda\_b be the best integral approximation defined
+in He, §3.2. Then
+
+\[
+ \boxed{\#\bigl(Z_{G(L)}(\gamma)\backslash
+ \Sigma^{\mathrm{top}}(Y_\mu(\gamma))\bigr)
+ =\dim V_\mu(\lambda_\gamma).}
+\]
+
+There is no integrality assumption on the Newton point. All numbered
+references to propositions and theorems below refer to the uploaded
+paper unless stated otherwise.
+
+\section{1. The component-count
+reduction}\label{the-component-count-reduction}
+
+Put w = w\_0 t\^{}mu and fix a reduction tree T. Let R be the paths
+corresponding to gamma that contribute to the maximal dimension,
+equivalently those satisfying
+
+\[
+ \ell(p)+\ell(\operatorname{end}(p))
+ -\langle\nu_\gamma,2\rho\rangle=\dim X_w(b).
+\]
+
+Theorem 1.4 identifies these paths with the top-contributing paths on
+the affine Lusztig side. The component bijections used in §3.6, Theorem
+2.8, Proposition 2.5, and Theorem 3.2(1) give, without requiring
+integrality,
+
+\[
+ C_\mu(\gamma)
+ :=\#\bigl(Z_{G(L)}(\gamma)\backslash
+ \Sigma^{\mathrm{top}}(Y_\mu(\gamma))\bigr)
+ =\sum_{p\in\mathcal R}n_{p,\gamma},
+ \qquad
+ |\mathcal R|=\dim V_\mu(\lambda_\gamma).
+\]
+
+Thus it suffices to prove n\_\{p,gamma\} = 1 for every p in R.
+
+Every such path has a very special endpoint. One can use the stabilizer
+argument in §3.2 directly, so no separate virtual-dimension assertion is
+needed here. Indeed, X\_p(b) is J\_b-stable and has the same dimension
+as X\_w(b), giving an equivariant injection of its top components into
+those of X\_w(b). Its fibration over X\_end(p)(b) gives an equivariant
+bijection on top components. The stabilizers are therefore the
+stabilizers of top components of X\_w(b), which are very special by
+Theorem 3.2(2) and the component bijection between X\_w(b) and X\_mu(b).
+As in §3.2, this means that the parahoric P\_p has maximal log-volume
+among the tau-stable parahorics in the Newton Levi M\_p.
+
+Write end(p) = u tau as in §2.5. Choose the corresponding conjugate
+gamma\textquotesingle{} in P\_p dot(tau). Proposition 2.7 and its proof
+identify the top components of the partial affine Springer fiber with
+the top components of its regular locus. Consequently it is enough to
+show
+
+\[
+ Z_{M_p(L)}(\gamma')
+ \text{ acts transitively on }
+ Y^{M_p,\mathrm{reg}}_{K_p,\tau}(\gamma').
+ \tag{1}
+\]
+
+Theorem 1.3 identifies this centralizer with the original centralizer of
+gamma.
+
+\section{2. Very special parahorics for a general-linear slope
+block}\label{very-special-parahorics-for-a-general-linear-slope-block}
+
+Consider GL\_N, where N = md, with an isoclinic Newton slope r/d in
+lowest terms. The determinant valuation is mr, and the length-zero
+element is tau = omega\^{}\{mr\}, where omega is the usual length-zero
+rotation with determinant valuation one.
+
+For N \textgreater= 2, label the affine A\_\{N-1\} vertices cyclically
+by Z/NZ. Conjugation by tau rotates them by mr. Since gcd(r,d) = 1, its
+orbits are exactly the d-element congruence classes modulo m.
+
+A tau-stable spherical subset K is the complement of a nonempty union of
+these orbits. If q congruence classes are deleted, let a\_1,...,a\_q be
+the cyclic gaps between their representatives in one period of length m.
+Then a\_i \textgreater= 1, their sum is m, and the log-volume is
+
+\[
+ n_K=d\sum_{i=1}^q\frac{a_i(a_i-1)}2.
+\]
+
+For q \textgreater{} 1, this is strictly less than d m(m-1)/2. Hence
+maximal log-volume occurs exactly when a single orbit is deleted. For m
+= 1 this gives K empty. For d = 1 it gives an ordinary hyperspecial
+parahoric. GL\_1 is the root-free version of the same lattice
+description.
+
+Accordingly, a very special P\_K in this block stabilizes a partial
+periodic lattice chain
+
+\[
+ \cdots\supset\Lambda_i\supset\Lambda_{i+1}\supset\cdots,
+ \qquad\Lambda_{i+d}=t\Lambda_i,
+ \qquad\dim_k(\Lambda_i/\Lambda_{i+1})=m.
+ \tag{2}
+\]
+
+The coset condition defining Y\_\{K,tau\}(gamma) is
+
+\[
+ \gamma\Lambda_i=\Lambda_{i+r}\quad(i\in\mathbb Z).
+ \tag{3}
+\]
+
+This works for every omitted orbit: choosing a different orbit changes
+the reference partial chain but not (2)-\/-(3).
+
+\section{3. The integral root
+construction}\label{the-integral-root-construction}
+
+We prove the transitivity in (1) for an arbitrary isoclinic GL\_N block,
+with no coprimality condition on the determinant valuation and N.
+
+Let gamma be regular semisimple on V = L\^{}N, all of whose eigenvalues
+have valuation r/d. Set
+
+\[
+ \beta=t^{-r}\gamma^d,
+ \qquad B=O[\beta].
+\]
+
+All eigenvalues of beta are units. Its minimal polynomial has
+coefficients in O and unit constant coefficient. Thus B is finite over
+O, beta is a unit of B, and B is t-adically complete. It is a
+commutative subalgebra of L{[}gamma{]}.
+
+There is an element h in B\^{}times such that
+
+\[
+ h^d=\beta.
+ \tag{4}
+\]
+
+To see this, B/tB is a finite Artinian k-algebra. Its residue fields are
+k and beta is a unit in each one. Since k is algebraically closed and d
+is invertible in k, choose a d-th root in each residue field and lift it
+through the nilpotent radical. The derivative d h\^{}\{d-1\} is a unit.
+Hensel lifting in the complete ring B then gives (4). Here d is
+invertible because d \textless= N and the paper\textquotesingle s GL\_N
+characteristic hypothesis excludes all primes \textless= N.
+
+Choose integers a,b with ad + br = 1 and define the fixed operator
+
+\[
+ \pi=t^a\gamma^b h^{-b}.
+ \tag{5}
+\]
+
+All factors commute. Equations (4)-\/-(5) give the exact identities
+
+\[
+ \boxed{\pi^d=t,\qquad\gamma=\pi^r h.}
+ \tag{6}
+\]
+
+For example, pi\^{}d = t\^{}\{ad\} gamma\^{}\{bd\} beta\^{}\{-b\} =
+t\^{}\{ad+br\}, and pi\^{}r h = t\^{}\{ar\} gamma\^{}\{br\} h\^{}\{ad\}
+= gamma\^{}\{br+ad\}.
+
+Since X\^{}d-t is Eisenstein, F = L{[}pi{]} is a totally ramified field
+of degree d and O\_F = O{[}pi{]}. In equal characteristic F is k((pi)).
+The vector space V has dimension m over F, and h is F-linear. The
+argument below is linear algebra over O\_F, so it does not require
+applying a geometric theorem over this auxiliary, possibly ramified,
+field.
+
+Moreover, putting A = L{[}gamma{]}, one has
+
+\[
+ A=F[h].
+ \tag{7}
+\]
+
+Both inclusions follow from (5)-\/-(6) and h in B. Because gamma is
+regular semisimple, A is an etale L-algebra of dimension N, acting with
+a cyclic vector on V. Equation (7) implies that h is regular semisimple
+on the m-dimensional F-vector space V. The centralizers agree exactly:
+
+\[
+ Z_{\mathrm{GL}_N(L)}(\gamma)
+ =A^\times
+ =Z_{\mathrm{GL}_m(F)}(h).
+ \tag{8}
+\]
+
+Equivalently, an L-linear operator commuting with gamma commutes with
+beta, h, and pi; conversely an F-linear operator commuting with h
+commutes with gamma.
+
+\section{4. Identifying the lattice problem and its regular
+locus}\label{identifying-the-lattice-problem-and-its-regular-locus}
+
+Suppose a partial chain satisfies (2)-\/-(3). Then
+
+\[
+ \beta\Lambda_i=t^{-r}\gamma^d\Lambda_i=\Lambda_i.
+\]
+
+It follows that B preserves Lambda\_i. Both h and h\^{}\{-1\} belong to
+B, so h Lambda\_i = Lambda\_i. Using (5) and ad+br = 1,
+
+\[
+ \pi\Lambda_i=\Lambda_{i+ad+br}=\Lambda_{i+1}.
+ \tag{9}
+\]
+
+Consequently Lambda\_0 is an O\_F-lattice of rank m, and
+
+\[
+ \Lambda_i=\pi^i\Lambda_0,
+ \qquad h\Lambda_0=\Lambda_0.
+ \tag{10}
+\]
+
+Conversely, any h-stable O\_F-lattice Lambda gives the partial chain
+pi\^{}i Lambda. This chain has the period and quotient dimensions in
+(2), and gamma = pi\^{}r h gives (3). This is an equivariant bijection
+of lattice points, with the centralizers identified by (8). Importantly,
+F and h were chosen from the fixed gamma, independently of the lattice.
+
+The regular loci also match. The reductive quotient of P\_K is
+(GL\_m)\^{}d. The automorphism induced by tau permutes these d factors
+cyclically, since gcd(r,d) = 1. For an element in this cyclic coset, its
+centralizer is isomorphic to the centralizer of the product around the
+cycle in GL\_m: the commuting equations successively determine all
+factor coordinates from one, and the remaining equation is commutation
+with the cycle product. Therefore coset regularity is equivalent to
+regularity of that product.
+
+On Lambda\_0/pi Lambda\_0, the cycle product is the reduction of
+
+\[
+ \gamma^d/t^r=\beta=h^d.
+\]
+
+Since h lies in O{[}beta{]}, its reduction is a polynomial in the
+reduction of beta. Conversely beta is h\^{}d. Thus, for the induced
+m-by-m matrices,
+
+\[
+ k[\bar h]=k[\bar\beta].
+ \tag{11}
+\]
+
+Their centralizers coincide. Hence beta-bar is regular if and only if
+h-bar is regular. This proves that the regular points of
+Y\_\{K,tau\}(gamma) correspond exactly to h-stable O\_F-lattices on
+which h has regular reduction. An isomorphism of auxiliary ind-schemes
+is not required: the equivariant point identification and the
+transitivity argument below suffice for the component count.
+
+For completeness, the required ordinary GL\_m transitivity has an
+elementary proof. Write R = O\_F{[}h{]}. At a regular point, h-bar is a
+cyclic matrix on Lambda/pi Lambda. Lift a cyclic vector to v in Lambda.
+The vectors
+
+\[
+ v,hv,\ldots,h^{m-1}v
+\]
+
+are an O\_F-basis of Lambda, so Lambda = R v. Since h is regular
+semisimple, any two such cyclic vectors differ by multiplication by an
+element of F{[}h{]}\^{}times = A\^{}times. Thus this centralizer acts
+transitively on the regular lattices. The regular locus is nonempty: the
+same construction from any generic cyclic vector gives a lattice on
+which h is the integral companion matrix, with cyclic reduction. The
+eigenvalues of h are units, so the companion matrix is invertible over
+O\_F.
+
+Using (8)-\/-(11), the original centralizer acts transitively on the
+k-valued points of Y\_\{K,tau\}\^{}\{reg\}(gamma). This suffices for
+transitivity on its top-dimensional components: over the algebraically
+closed field k, choose in each component a k-point belonging to no other
+component, and carry one such point to the other. The spaces are locally
+of finite type (or their perfections), so such points exist. Proposition
+2.7 and its proof identify these components with those of
+Y\_\{K,tau\}(gamma), so the latter also have one centralizer orbit.
+
+This establishes the GL slope-block transitivity required in (1).
+
+\section{5. Completion for GL\_n}\label{completion-for-gl_n}
+
+Every Newton Levi of GL\_n is a direct product of general-linear groups.
+On each factor the corresponding endpoint has a central Newton slope
+r\_j/d\_j and length-zero rotation determined by its determinant
+valuation. The Hodge-\/-Newton representative gamma\textquotesingle{}
+can be taken in P\_p dot(tau), and its restriction to each factor is
+isoclinic with that slope. This also follows directly from its chain
+condition:
+(gamma\textquotesingle\_j)\textsuperscript{\{d\_j\}/t}\{r\_j\} preserves
+the relevant lattices and is a unit.
+
+The affine Dynkin diagram is the disjoint union of the factor diagrams,
+and log-volumes add. Therefore maximal log-volume in the product means
+maximal log-volume in every factor. Each factor is exactly the
+partial-chain case in §2. The regularity conditions and the centralizer
+actions factor as well.
+
+Section 4 gives transitivity on the regular locus of every factor. Their
+product gives (1), and hence n\_\{p,gamma\} = 1 for every p in R. The
+identities in §1 prove the theorem for GL\_n, including all basic and
+nonbasic Newton points.
+
+\section{6. Completion for Sp\_2n}\label{completion-for-sp_2n}
+
+For a dominant Newton point of Sp\_2n, the positive slope blocks occur
+paired with their negative duals. Its split Newton Levi has the actual
+direct-product form
+
+\[
+ M\simeq\prod_{j=1}^s\mathrm{GL}_{a_j}\times\mathrm{Sp}_{2c}.
+\]
+
+The symplectic factor is the zero-slope block. A GL factor acts on a
+positive-slope space and by its inverse transpose on the paired
+negative-slope space; there is no determinant constraint on that factor.
+Thus these are genuine GL factors, not a quotient or a subgroup with an
+extra norm constraint.
+
+The GL factors are treated by §§2-\/-4. All denominators d\_j are prime
+to char(k): each a\_j \textless= n, while the paper\textquotesingle s
+symplectic characteristic assumption excludes 2 and all primes
+\textless= n.
+
+For the zero-slope factor, Sp\_2c is simply connected, so its
+length-zero group Omega is trivial. The tau component there is
+consequently the identity. Its very special parahorics are hyperspecial.
+Concretely, in affine type C\_c, deleting vertex i gives a finite Weyl
+group of type C\_i times C\_\{c-i\}, with longest length
+
+\[
+ i^2+(c-i)^2.
+\]
+
+The maximal value c\^{}2 occurs exactly at i=0,c. A smaller spherical
+subset cannot achieve that value. These two vertices give the
+hyperspecial parahorics.
+
+Theorem 3.5 gives centralizer transitivity on the regular locus of this
+hyperspecial affine Springer fiber. The theorem applies to either
+hyperspecial type by transport: conjugation by the symplectic similitude
+diag(t I\_c,I\_c) gives an L-group automorphism interchanging the two
+types. After moving the relevant hyperspecial subgroup to the standard
+one, an element in it can be conjugated into its Iwahori by choosing a
+stable isotropic flag in its reduction. This puts the situation under
+the stated hypotheses of Theorem 3.5. When c=0 there is no symplectic
+factor to treat.
+
+As in the GL case, maximal log-volume, regularity, and centralizers
+factor over this direct product. The general-linear transitivity from §4
+and the symplectic transitivity from Theorem 3.5 therefore give (1) for
+every top-contributing path. It follows that every n\_\{p,gamma\} equals
+one. Section 1 proves the desired equality for Sp\_2n.
+
+\section{7. Scope and dependency
+audit}\label{scope-and-dependency-audit}
+
+The new step is the root construction in the finite integral algebra B,
+followed by the regular-locus identification (11). This handles
+arbitrary slope multiplicities, rather than only the superbasic case. It
+does \textbf{not} extend the local field merely to clear denominators
+and then equate component counts; it identifies the original
+lattice-chain problem with an F-linear lattice problem inside the
+original representation, preserving its full centralizer.
+
+The geometric inputs used from He are Theorems 1.3, 1.4, 2.8, and 3.2,
+Proposition 2.5, Proposition 2.7 and its regular-locus argument, the
+stabilizer argument in §3.2, and the flag/Grassmannian component
+bijections in §3.6. Theorem 3.5 is needed only for the zero-slope
+symplectic factor. None of these inputs is applied outside the
+hypotheses stated in the uploaded paper.
+
+The lattice calculations, integral-root existence, centralizer equality,
+regularity comparison, and affine A/C maximal-log-volume classifications
+are supplied in this note. Finite-rank checks of the diagram
+classifications and a non-superbasic slope-block example are supporting
+computations, not substitutes for the general proofs and not a Lean
+verification.
+
+The reproducible check script is \url{checks/check_local_reduction.py}.
+Running it with Python in this workspace passed 77 GL rank/rotation
+cases through N=12, symplectic diagram ranks 1-\/-8, the repeated GL\_4
+slope 1/2 cyclic-lattice calculation, and the associated Sp\_8
+block-pairing identity.
+
+All of the local arguments use only a complete discrete valuation ring O
+with algebraically closed residue field and d invertible in O. They
+therefore apply to W(k) as well as k{[}{[}t{]}{]}. The auxiliary field F
+may be ramified in mixed characteristic; no affine Springer transitivity
+theorem over F is invoked, since the cyclic-lattice argument proves the
+required transitivity directly. For the zero-slope symplectic factor the
+field remains the original L, and Theorem 3.5 explicitly includes mixed
+characteristic. Thus the proof covers both settings in §1.1 of the
+paper.
+
+The statement proved here is restricted to GL\_n and Sp\_2n under the
+paper\textquotesingle s characteristic assumptions. Other reductive
+groups, bad characteristic, and a formal proof assistant development are
+outside this argument. No assertion about priority or the status of
+later literature is made.
+\end{document}
